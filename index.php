@@ -10,14 +10,15 @@ if (isset($_POST['login'])) {
     echo '$password = ' . $password; */
 
     // chk if password is matched in database record
-    $get_admin_data = mysqli_query($conn, "SELECT * FROM administration where username = '$username' AND password = '$password'");
+    $get_admin_data = mysqli_query($conn, "SELECT * FROM administration where username = '$username' AND password = '$password'");   // TODO: filter active status only
 
     if (mysqli_num_rows($get_admin_data) > 0) {
         $rowadmin = mysqli_fetch_assoc($get_admin_data);
 
         // set SESSION
         // $_SESSION["group_name"] = 'superadmin';
-        // $_SESSION["user_id"] = $rowadmin['id'];
+        // TODO: double logic from 'users' or 'superadmin' table
+        $_SESSION["user_id"] = $rowadmin['id'];
         $_SESSION["upline"] = $rowadmin['id'];
 
         // TODO: get last login
