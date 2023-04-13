@@ -12,8 +12,19 @@ if (isset($_POST['create'])) {
     $upline = $_SESSION["upline"];
     $status = "Active";
 
-    $sql = "INSERT INTO users (username, name, contact, role, upline, status) VALUES
-    ('$username', '$name', '$contact', '$role', '$upline', '$status')";
+    // if id empty, then create new user, else update old user
+    $id = $_POST['user_id'];   // use to determine if CREATE or EDIT mode
+    // echo "<script>alert('id = $id';)</script>";   // D
+
+    if ($id == "") {
+        // echo "<script>alert('CREATE')</script>";   // D
+        $sql = "INSERT INTO users (username, name, contact, role, upline, status) VALUES
+            ('$username', '$name', '$contact', '$role', '$upline', '$status')";
+    } else {
+        // echo "<script>alert('EDIT')</script>";   // D
+        $sql = "UPDATE users SET name = '$name', 
+            contact = '$contact'";
+    }
 
     // TODO: popup err msg if Username is taken 
 
@@ -99,9 +110,9 @@ if (isset($_POST['create'])) {
                                                     <button class="btn btn-sm btn-info" onclick="window.location.href='../view?user=' + <?= $row['id'] ?> ">
                                                         View
                                                     </button>
-                                                    <!-- <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:3,&quot;name&quot;:&quot;12122&quot;,&quot;username&quot;:&quot;admin111&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Superadmins&quot;,&quot;contact_no&quot;:&quot;11112&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:34:53.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T15:02:04.000000Z&quot;,&quot;u_count&quot;:0,&quot;u_approve_count&quot;:0,&quot;u_cost&quot;:0,&quot;rent_count&quot;:0,&quot;u_approve_cost&quot;:0,&quot;u_downline_cost&quot;:0,&quot;u_profit&quot;:0,&quot;downline&quot;:[],&quot;cards&quot;:[]})">
+                                                    <button class="btn btn-sm btn-info" onclick='editModal(<?= json_encode($row) ?>)'>
                                                         Edit
-                                                    </button> -->
+                                                    </button>
                                                     <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to reset password?')){ window.location.href='../user/resetPassword/3' }">
                                                         Reset Pass
                                                     </button>
@@ -169,14 +180,21 @@ if (isset($_POST['create'])) {
             }
 
             function editModal(data) {
+                /* // alert("DEBUG: data = " + data);   // D
+                alert("DEBUG: data = " + JSON.stringify(data));
+                alert("DEBUG: data['contact'] = " + data['contact']);
+                alert("DEBUG: data.contact = " + data.contact); */
 
+                // open modal
                 $("#largeModal").modal();
+
+                // get data from json & assign to dom field
                 document.getElementById("user_id").value = data.id;
                 document.getElementById("role").value = data.role;
                 document.getElementById("username").value = data.username;
                 document.getElementById("username").readOnly = true;
                 document.getElementById("name").value = data.name;
-                document.getElementById("contact_no").value = data.contact_no;
+                document.getElementById("contact_no").value = data.contact;
             }
         </script>
     </div>
