@@ -1,4 +1,7 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/config.php'); ?>
+<?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/config.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
+?>
 
 <!doctype html>
 <html lang="en" dir="ltr">
