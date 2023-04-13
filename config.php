@@ -29,7 +29,9 @@ $host_name = $_SERVER['SERVER_NAME'];
 $host_name = "crm.ecomdemo.xyz";   // * TODO: 99mlbank.com
 /* $server_ssl = $_SERVER['REQUEST_SCHEME'];
 $url = $server_ssl.'://'.$host_name; */
-$url = "http://localhost:8080";   // OPT: http://crm.ecomdemo.xyz
+// $url = "http://localhost:8080";   // OPT: http://crm.ecomdemo.xyz
+$url = "https://99mlbank.com/";
+
 // echo '$url = ' . $url;
 // print_r($_SERVER);
 // define("SITEURL","http://crm.ecomdemo.xyz");
