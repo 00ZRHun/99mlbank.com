@@ -1,6 +1,8 @@
 <?php
 require_once('config.php');
 
+$error_msg = '';
+
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -32,6 +34,8 @@ if (isset($_POST['login'])) {
             window.location.replace("<?php echo SITEURL ?>/home.php");
         </script>
 <?php
+    } else {
+        $error_msg = 'These credentials do not match our records.';   // OPT 'Wrong password. Try Again.', 'Login Credential Incorrect.';
     }
 }
 ?>
@@ -95,6 +99,14 @@ if (isset($_POST['login'])) {
                                 <h3 class="card-title">Card Management System (RM)</h3>
                             </div>
                             <div class="card-body">
+
+                                <!--Error message-->
+                                <?php if ($error_msg != '') { ?>
+                                    <div class="alert alert-danger">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <div><?= $error_msg ?></div>
+                                    </div>
+                                <?php } ?>
 
                                 <form method="POST" action="../login">
                                     <input type="hidden" name="_token" value="r9f3AQV6W4HNN5KkT5O7CZwsTnEAsSzIhdFgXXcg">
