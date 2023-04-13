@@ -23,7 +23,7 @@ if (isset($_POST['create'])) {
     } else {
         // echo "<script>alert('EDIT')</script>";   // D
         $sql = "UPDATE users SET name = '$name', 
-            contact = '$contact'";
+            contact = '$contact' WHERE id = $id";
     }
 
     // TODO: popup err msg if Username is taken 
