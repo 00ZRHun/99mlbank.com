@@ -36,6 +36,44 @@ if (isset($_POST['create'])) {
         echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
     }
 }
+
+// inactive / active user
+if (isset($_GET['setInactive'])) {
+    // get required data
+    $id = $_GET['setInactive'];
+    $status = "";
+    // $status = "Inactive";
+    $sql = "SELECT status FROM users WHERE id = $id";
+    // echo "<script>alert('sql = $sql')</script>";
+    $res = mysqli_query($conn, $sql);
+    while ($myrow = mysqli_fetch_array($res)) {
+        $status = $myrow['status'];
+        $status = getOppositeStatus($status);   // inverse status
+    }
+    /* echo "<script>alert('status = $status')</script>";
+    echo "<script>alert('res = $res')</script>"; */
+
+    // update status
+    $sql = "UPDATE users SET status = '" . $status . "' WHERE id = $id";
+    /* echo "<script>alert('setInactive; id = $id')</script>";   // D
+    echo "<script>alert('sql = $sql')</script>"; */
+
+    if (mysqli_query($conn, $sql)) {
+        echo "<script>alert('Status updated successfully.')</script>";
+    } else {
+        echo "<script>alert('available = $available')</script>";
+        echo "<script>alert('sql = $sql')</script>";
+        echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
+    }
+}
+
+function getOppositeStatus($status)
+{
+    /* if ($status == "Active")   $status = "Inactive";
+    else                       $status = "Active";
+    return $status; */
+    return ($status == "Active") ? "Inactive" : "Active";   // ternary operator as above
+}
 ?>
 
 <div class="app-content  my-3 my-md-5">
@@ -116,7 +154,8 @@ if (isset($_POST['create'])) {
                                                     <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to reset password?')){ window.location.href='../user/resetPassword/3' }">
                                                         Reset Pass
                                                     </button>
-                                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to inactive user?')){ window.location.href='../user/setInactive/3' }">Inactive</button>
+                                                    <!-- <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to inactive user?')){ window.location.href='../user/setInactive/3' }">Inactive</button> -->
+                                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to <?= strtolower(getOppositeStatus($row['status'])) ?> user?')){ window.location.href='index.php?setInactive=' + <?= $row['id'] ?> }"><?= getOppositeStatus($row["status"]) ?></button> <!-- OPT: Superadmins/index.php?inactive=<?= $row["contact"] ?> -->
                                                 </td>
                                             </tr>
                                     <?php
