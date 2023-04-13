@@ -44,11 +44,6 @@ Password: 123456789
 https://github.com/00ZRHun/99mlbank.com
 ** push to branch bfr merge into master **
 
-## TODO
-
-- export sql script into ecadmin_99mlbank.sql
-- WR -> 12 Apr 2023
-
 ## Work Report
 
 ### 11 Apr 2023
@@ -81,5 +76,5 @@ https://github.com/00ZRHun/99mlbank.com
 - prevent to access other pages if haven't login yet
 - view user
 - edit user
-- export database script
+- export ecadmin_99mlbank database script into ecadmin_99mlbank.sql
 - upload server
