@@ -80,6 +80,8 @@ if (isset($_POST['create'])) {
                                         $count = 0;
 
                                         while ($row = $result->fetch_assoc()) {
+                                            /* echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
+                                            echo "<script>alert('Debug: username = " . $row["username"] . "')</script>";   // D */
                                     ?>
                                             <tr>
                                                 <td><?= $row["username"] ?></td>
@@ -93,7 +95,8 @@ if (isset($_POST['create'])) {
                                                     <div class="btn btn-sm" style="background-color:green;color:white">Active</div>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-info" onclick="window.location.href='../user/view/3' ">
+                                                    <!-- <button class="btn btn-sm btn-info" onclick="window.location.href='../view/' + <?= $row['id'] ?> "> --> <!-- OPT: ../user/view/3 -->
+                                                    <button class="btn btn-sm btn-info" onclick="window.location.href='../view?user=' + <?= $row['id'] ?> ">
                                                         View
                                                     </button>
                                                     <!-- <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:3,&quot;name&quot;:&quot;12122&quot;,&quot;username&quot;:&quot;admin111&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Superadmins&quot;,&quot;contact_no&quot;:&quot;11112&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:34:53.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T15:02:04.000000Z&quot;,&quot;u_count&quot;:0,&quot;u_approve_count&quot;:0,&quot;u_cost&quot;:0,&quot;rent_count&quot;:0,&quot;u_approve_cost&quot;:0,&quot;u_downline_cost&quot;:0,&quot;u_profit&quot;:0,&quot;downline&quot;:[],&quot;cards&quot;:[]})">
