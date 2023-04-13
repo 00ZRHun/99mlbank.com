@@ -13,7 +13,7 @@ $password = "bXwM}E=ME^!t";
 $dbname = "ecadmin_crm"; */
 $username = "zrhun";
 $password = "password";
-$dbname = "ecadmin_crm";
+$dbname = "ecadmin_99mlbank";
 
 //define("SITEURL","http://readyforyourreview.com/Loan_software"); 
 
@@ -23,7 +23,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 } /* else {   // D
-  echo ("Connection successful");
+  echo ("Connection to $dbname database successful");
 } */
 $host_name = $_SERVER['SERVER_NAME'];
 $host_name = "crm.ecomdemo.xyz";   // * TODO: 99mlbank.com
@@ -40,10 +40,10 @@ define("SITEURL", $url);
 
 
 //$host_name = 
-$select_superadmin = "SELECT * from domain_list_setting where domain_name='$host_name'";
+/* $select_superadmin = "SELECT * from domain_list_setting where domain_name='$host_name'";
 $row_superadmin = $conn->query($select_superadmin);
 $result_superadmin = mysqli_fetch_assoc($row_superadmin);
 
 $domain_status = $result_superadmin['status'];
 $table_prefix = $result_superadmin['table_prefix'];
-$first_method = $result_superadmin['first_method'];
+$first_method = $result_superadmin['first_method']; */
