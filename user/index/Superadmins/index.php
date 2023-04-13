@@ -42,31 +42,46 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>admin111</td>
-                                        <td>12122</td>
-                                        <td>11112</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>
-                                            <div class="btn btn-sm" style="background-color:green;color:white">Active</div>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info" onclick="window.location.href='../user/view/3' ">
-                                                View
-                                            </button>
-                                            <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:3,&quot;name&quot;:&quot;12122&quot;,&quot;username&quot;:&quot;admin111&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Superadmins&quot;,&quot;contact_no&quot;:&quot;11112&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:34:53.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T15:02:04.000000Z&quot;,&quot;u_count&quot;:0,&quot;u_approve_count&quot;:0,&quot;u_cost&quot;:0,&quot;rent_count&quot;:0,&quot;u_approve_cost&quot;:0,&quot;u_downline_cost&quot;:0,&quot;u_profit&quot;:0,&quot;downline&quot;:[],&quot;cards&quot;:[]})">
-                                                Edit
-                                            </button>
-                                            <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to reset password?')){ window.location.href='../user/resetPassword/3' }">
-                                                Reset Pass
-                                            </button>
-                                            <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to inactive user?')){ window.location.href='../user/setInactive/3' }">Inactive</button>
+                                    <!-- list users -->
+                                    <?php
+                                    // get upline from SESSION (index.php)
+                                    $upline = $_SESSION["upline"];
+                                    // echo '$upline = ' . $upline;
+                                    $sql = "SELECT * FROM users WHERE upline = $upline";
+                                    $result = mysqli_query($conn, $sql);
+                                    if ($result->num_rows > 0) {
+                                        $count = 0;
 
-                                        </td>
-                                    </tr>
+                                        while ($row = $result->fetch_assoc()) {
+                                    ?>
+                                            <tr>
+                                                <td><?= $row["username"] ?></td>
+                                                <td><?= $row["name"] ?></td>
+                                                <td><?= $row["contact"] ?></td>
+                                                <td>0</td> <!-- TODO: resolve dummy data -->
+                                                <td>0</td> <!-- TODO: resolve dummy data -->
+                                                <td>0</td> <!-- TODO: resolve dummy data -->
+                                                <td>0</td> <!-- TODO: resolve dummy data -->
+                                                <td>
+                                                    <div class="btn btn-sm" style="background-color:green;color:white">Active</div>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-info" onclick="window.location.href='../user/view/3' ">
+                                                        View
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:3,&quot;name&quot;:&quot;12122&quot;,&quot;username&quot;:&quot;admin111&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Superadmins&quot;,&quot;contact_no&quot;:&quot;11112&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:34:53.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T15:02:04.000000Z&quot;,&quot;u_count&quot;:0,&quot;u_approve_count&quot;:0,&quot;u_cost&quot;:0,&quot;rent_count&quot;:0,&quot;u_approve_cost&quot;:0,&quot;u_downline_cost&quot;:0,&quot;u_profit&quot;:0,&quot;downline&quot;:[],&quot;cards&quot;:[]})">
+                                                        Edit
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to reset password?')){ window.location.href='../user/resetPassword/3' }">
+                                                        Reset Pass
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to inactive user?')){ window.location.href='../user/setInactive/3' }">Inactive</button>
+                                                </td>
+                                            </tr>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
 
