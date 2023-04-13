@@ -5,16 +5,11 @@ if (isset($_GET['user'])) {
     $user_id = $_GET['user'];
     // echo "<script>alert('Debug: user_id = $user_id')</script>";   // D
 
-    // get upline from SESSION (index.php)
-    $upline = $_SESSION["upline"];
-    // echo '$upline = ' . $upline;
-    // $sql = "SELECT * FROM users WHERE upline = $upline";
+    // get single data - find user by id
     $sql = "SELECT * FROM users WHERE id = $user_id";
     // $search_query = "SELECT * FROM users WHERE id = $user_id";
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
-        $count = 0;
-
         /* while ($row = $result->fetch_assoc()) {
             echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
             echo "<script>alert('Debug: username = " . $row['username'] . "')</script>";   // D
