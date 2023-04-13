@@ -11,8 +11,12 @@ $dbname = "ccrdskmy_loan_software";*/
 /* $username = "ecadmin_crm";
 $password = "bXwM}E=ME^!t";
 $dbname = "ecadmin_crm"; */
-$username = "zrhun";
-$password = "password";
+// local credential
+/* $username = "zrhun";
+$password = "password"; */
+// server credential
+$username = "ecadmin_99mlbank";
+$password = "bXwM}E=ME^!t";
 $dbname = "ecadmin_99mlbank";
 
 //define("SITEURL","http://readyforyourreview.com/Loan_software"); 
