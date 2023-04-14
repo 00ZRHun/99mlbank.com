@@ -55,7 +55,7 @@ if (isset($_GET['setInactive'])) {
 
     // update status
     $sql = "UPDATE users SET status = '" . $status . "' WHERE id = $id";
-    /* echo "<script>alert('setInactive; id = $id')</script>";   // D
+    /* echo "<script>alert('setInactive; id = $id; status = $status')</script>";   // D
     echo "<script>alert('sql = $sql')</script>"; */
 
     if (mysqli_query($conn, $sql)) {
@@ -141,7 +141,7 @@ function getOppositeStatus($status)
                                                 <td>0</td> <!-- TODO: resolve dummy data -->
                                                 <td>0</td> <!-- TODO: resolve dummy data -->
                                                 <td>
-                                                    <div class="btn btn-sm" style="background-color:green;color:white">Active</div>
+                                                    <div class="btn btn-sm" style="background-color:<?= $row["status"] == "Active" ? "green" : "red" ?>;color:white"><?= $row["status"] ?></div>
                                                 </td>
                                                 <td>
                                                     <!-- <button class="btn btn-sm btn-info" onclick="window.location.href='../view/' + <?= $row['id'] ?> "> --> <!-- OPT: ../user/view/3 -->
@@ -155,7 +155,7 @@ function getOppositeStatus($status)
                                                         Reset Pass
                                                     </button>
                                                     <!-- <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to inactive user?')){ window.location.href='../user/setInactive/3' }">Inactive</button> -->
-                                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to <?= strtolower(getOppositeStatus($row['status'])) ?> user?')){ window.location.href='index.php?setInactive=' + <?= $row['id'] ?> }"><?= getOppositeStatus($row["status"]) ?></button> <!-- OPT: Superadmins/index.php?inactive=<?= $row["contact"] ?> -->
+                                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to <?= strtolower(getOppositeStatus($row['status'])) ?> user?')){ window.location.href='<?= $url ?>/user/index/Superadmins/index.php?setInactive=' + <?= $row['id'] ?> }"><?= getOppositeStatus($row["status"]) ?></button> <!-- OPT: Superadmins/index.php?inactive=<?= $row["contact"] ?> -->
                                                 </td>
                                             </tr>
                                     <?php
