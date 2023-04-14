@@ -145,7 +145,7 @@ function getOppositeStatus($status)
                                                 </td>
                                                 <td>
                                                     <!-- <button class="btn btn-sm btn-info" onclick="window.location.href='../view/' + <?= $row['id'] ?> "> --> <!-- OPT: ../user/view/3 -->
-                                                    <button class="btn btn-sm btn-info" onclick="window.location.href='../view?user=' + <?= $row['id'] ?> ">
+                                                    <button class="btn btn-sm btn-info" onclick="window.location.href='<?= $url ?>/user/view?user=' + <?= $row['id'] ?> ">
                                                         View
                                                     </button>
                                                     <button class="btn btn-sm btn-info" onclick='editModal(<?= json_encode($row) ?>)'>
