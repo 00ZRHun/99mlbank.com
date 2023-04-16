@@ -37,6 +37,28 @@ if (isset($_POST['create'])) {
     }
 }
 
+// reset password
+if (isset($_GET['resetPassword'])) {
+    // get id
+    $id = $_GET['resetPassword'];
+
+    // update password
+    $password = "123456789";
+    $sql = "UPDATE users SET password = '" . $password . "' WHERE id = $id";
+    /* echo "<script>alert('resetPassword; id = $id; password = $password')</script>";   // D
+    echo "<script>alert('sql = $sql')</script>"; */
+
+    if (mysqli_query($conn, $sql)) {
+        // echo "<script>alert('Password reset successfully.')</script>";
+        echo "<script>window.location.replace('$url/user/index/Superadmins/index.php');</script>";
+    } else {
+        echo "<script>alert('id = $id')</>";
+        echo "<script>alert('sql = $sql')</script>";
+        echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
+    }
+}
+
+
 // inactive / active user
 if (isset($_GET['setInactive'])) {
     // get required data
@@ -151,7 +173,7 @@ function getOppositeStatus($status)
                                                     <button class="btn btn-sm btn-info" onclick='editModal(<?= json_encode($row) ?>)'>
                                                         Edit
                                                     </button>
-                                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to reset password?')){ window.location.href='../user/resetPassword/3' }">
+                                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to reset password?')){ window.location.href='<?= $url ?>/user/index/Superadmins/index.php?resetPassword=' + <?= $row['id'] ?> }"> <!-- OPT: '../user/resetPassword/3' -->
                                                         Reset Pass
                                                     </button>
                                                     <!-- <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to inactive user?')){ window.location.href='../user/setInactive/3' }">Inactive</button> -->
