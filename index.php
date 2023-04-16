@@ -32,7 +32,7 @@ if (isset($_POST['login'])) {
         // }
 ?>
         <script>
-            window.location.replace("<?php echo SITEURL ?>/home.php");
+            window.location.replace("<?= SITEURL ?>/home.php");
         </script>
 <?php
     } else {
