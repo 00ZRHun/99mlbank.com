@@ -27,18 +27,17 @@ if (isset($_POST['create'])) {
     }
 
     if (mysqli_query($conn, $sql)) {
-        echo "<script>alert('Created successfully.')</script>";
+        // echo "<script>alert('Created successfully.')</script>";
     } else {
-        echo "<script>alert('user_id = $user_id ; pay_date = $pay_date; amount = $amount; remarks = $remarks; id = $id')</script>";
+        echo "<script>alert('id = $id')</script>";
         echo "<script>alert('sql = $sql')</script>";
         echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
     }
 }
 
-// create or edit rent
+// delete rent
 if (isset($_GET['delete'])) {
 
-    // if id empty, then create new rent, else update old rent
     $id = $_GET['delete'];   // use to determine if CREATE or EDIT mode
     // echo "<script>alert('id = $id';)</script>";   // D
 
@@ -47,6 +46,7 @@ if (isset($_GET['delete'])) {
     if (mysqli_query($conn, $sql)) {
         // echo "<script>alert('Created successfully.')</script>";
         echo "<script>window.location.href='$url/rent/index.php';</script>";
+        // echo "<script>window.location.href='" . SITEURL . "/rent/index.php';</script>";   // ditto
     } else {
         echo "<script>alert('user_id = $user_id ; pay_date = $pay_date; amount = $amount; remarks = $remarks; id = $id')</script>";
         echo "<script>alert('sql = $sql')</script>";
@@ -88,7 +88,7 @@ if (isset($_GET['delete'])) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- list users -->
+                                    <!-- list rents -->
                                     <?php
                                     /* // get upline from SESSION (index.php)
                                     $upline = $_SESSION["upline"];
