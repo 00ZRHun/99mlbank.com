@@ -35,51 +35,42 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>2023-04-11</td>
-                                        <td>12122</td>
-                                        <td>1111</td>
-                                        <td>April 2023</td>
-                                        <td>for emergency</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:2,&quot;pay_date&quot;:&quot;2023-04-11&quot;,&quot;month&quot;:&quot;4&quot;,&quot;year&quot;:&quot;2023&quot;,&quot;user_id&quot;:3,&quot;amount&quot;:1111,&quot;remarks&quot;:&quot;for emergency&quot;,&quot;created_at&quot;:&quot;2023-04-11T02:17:22.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T02:18:04.000000Z&quot;,&quot;deleted_at&quot;:null,&quot;rental&quot;:{&quot;id&quot;:3,&quot;name&quot;:&quot;12122&quot;,&quot;username&quot;:&quot;admin111&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Superadmins&quot;,&quot;contact_no&quot;:&quot;11112&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:34:53.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-13T20:21:32.000000Z&quot;}})">
-                                                Edit
-                                            </button>
-                                            <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/rent/destroy/2' }">
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2023-04-12</td>
-                                        <td>12122</td>
-                                        <td>1000</td>
-                                        <td>April 2023</td>
-                                        <td>for emergency111</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:3,&quot;pay_date&quot;:&quot;2023-04-12&quot;,&quot;month&quot;:&quot;4&quot;,&quot;year&quot;:&quot;2023&quot;,&quot;user_id&quot;:3,&quot;amount&quot;:1000,&quot;remarks&quot;:&quot;for emergency111&quot;,&quot;created_at&quot;:&quot;2023-04-11T02:29:14.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T02:29:14.000000Z&quot;,&quot;deleted_at&quot;:null,&quot;rental&quot;:{&quot;id&quot;:3,&quot;name&quot;:&quot;12122&quot;,&quot;username&quot;:&quot;admin111&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Superadmins&quot;,&quot;contact_no&quot;:&quot;11112&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:34:53.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-13T20:21:32.000000Z&quot;}})">
-                                                Edit
-                                            </button>
-                                            <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/rent/destroy/3' }">
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2023-04-18</td>
-                                        <td>Name</td>
-                                        <td>100</td>
-                                        <td>April 2023</td>
-                                        <td>Remarks</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:4,&quot;pay_date&quot;:&quot;2023-04-18&quot;,&quot;month&quot;:&quot;4&quot;,&quot;year&quot;:&quot;2023&quot;,&quot;user_id&quot;:5,&quot;amount&quot;:100,&quot;remarks&quot;:&quot;Remarks&quot;,&quot;created_at&quot;:&quot;2023-04-17T12:04:37.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-17T13:47:12.000000Z&quot;,&quot;deleted_at&quot;:null,&quot;rental&quot;:{&quot;id&quot;:5,&quot;name&quot;:&quot;Name&quot;,&quot;username&quot;:&quot;Username 2&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Superadmins&quot;,&quot;contact_no&quot;:&quot;Contact No&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-12T16:37:38.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-13T20:14:03.000000Z&quot;}})">
-                                                Edit
-                                            </button>
-                                            <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/rent/destroy/4' }">
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    <!-- list users -->
+                                    <?php
+                                    /* // get upline from SESSION (index.php)
+                                    $upline = $_SESSION["upline"];
+                                    // echo '$upline = ' . $upline; */
+                                    // $sql = "SELECT * FROM users WHERE upline = $upline";
+                                    $sql = "SELECT rt.*, us.name FROM rent as rt left join users as us ON rt.superadmin = us.id";
+                                    // echo "<script>alert('sql = $sql')</script>";   // D
+                                    $result = mysqli_query($conn, $sql);
+                                    if ($result->num_rows > 0) {
+                                        $count = 0;
+
+                                        while ($row = $result->fetch_assoc()) {
+                                            /* echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
+                                            echo "<script>alert('Debug: username = " . $row["username"] . "')</script>";   // D */
+                                    ?>
+                                            <tr>
+                                                <td><?= $row['pay_date'] ?></td> <!-- OPT: 2023-04-11 -->
+                                                <!-- <td><?= date('Y-d-m', strtotime($row['pay_date'])) ?></td> --> <!-- ditto -->
+                                                <td><?= $row['name'] ?></td> <!-- OPT: 12122 -->
+                                                <td><?= $row['amount'] ?></td> <!-- OPT: 1111 -->
+                                                <td><?= date('F Y', strtotime($row['pay_date'])) ?> <!-- OPT: April 2023 -->
+                                                <td><?= $row['remarks'] ?></td> <!-- OPT: for emergency -->
+                                                <td>
+                                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:2,&quot;pay_date&quot;:&quot;2023-04-11&quot;,&quot;month&quot;:&quot;4&quot;,&quot;year&quot;:&quot;2023&quot;,&quot;user_id&quot;:3,&quot;amount&quot;:1111,&quot;remarks&quot;:&quot;for emergency&quot;,&quot;created_at&quot;:&quot;2023-04-11T02:17:22.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T02:18:04.000000Z&quot;,&quot;deleted_at&quot;:null,&quot;rental&quot;:{&quot;id&quot;:3,&quot;name&quot;:&quot;12122&quot;,&quot;username&quot;:&quot;admin111&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Superadmins&quot;,&quot;contact_no&quot;:&quot;11112&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:34:53.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-13T20:21:32.000000Z&quot;}})">
+                                                        Edit
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/rent/destroy/2' }">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
 
