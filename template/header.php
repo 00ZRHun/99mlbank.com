@@ -275,13 +275,15 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 										<a class="dropdown-item" href="editprofile.html">
 											<i class="dropdown-icon  icon icon-settings"></i> Account Settings
 										</a> -->
-									<a class="dropdown-item" href="../logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+									<!-- <a class="dropdown-item" href="<?= SITEURL ?>/logout.php" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> --> <!-- OPT: ../logout -->
+									<a class="dropdown-item" href="<?= SITEURL ?>/logout.php">
 										<i class="dropdown-icon icon icon-power"></i> Logout
 									</a>
 
-									<form id="logout-form" action="../logout" method="POST" class="d-none">
+									<!-- TODO: chk what is doing over here -->
+									<!-- <form id="logout-form" action="../logout" method="POST" class="d-none">
 										<input type="hidden" name="_token" value="zZmMzS63qa18RXY01BZGv6chzLXG1ppo7j1x0Zub">
-									</form>
+									</form> -->
 								</div>
 							</div>
 						</div>
