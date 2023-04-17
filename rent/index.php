@@ -29,7 +29,6 @@ if (isset($_POST['create'])) {
     if (mysqli_query($conn, $sql)) {
         echo "<script>alert('Created successfully.')</script>";
     } else {
-        echo "<script>alert('available = $available')</script>";
         echo "<script>alert('user_id = $user_id ; pay_date = $pay_date; amount = $amount; remarks = $remarks; id = $id')</script>";
         echo "<script>alert('sql = $sql')</script>";
         echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
