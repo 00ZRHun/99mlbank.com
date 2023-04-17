@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
 
-// create rent
+// create or edit rent
 if (isset($_POST['create'])) {
 
     $user_id = $_POST['user_id'];
@@ -28,6 +28,25 @@ if (isset($_POST['create'])) {
 
     if (mysqli_query($conn, $sql)) {
         echo "<script>alert('Created successfully.')</script>";
+    } else {
+        echo "<script>alert('user_id = $user_id ; pay_date = $pay_date; amount = $amount; remarks = $remarks; id = $id')</script>";
+        echo "<script>alert('sql = $sql')</script>";
+        echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
+    }
+}
+
+// create or edit rent
+if (isset($_GET['delete'])) {
+
+    // if id empty, then create new rent, else update old rent
+    $id = $_GET['delete'];   // use to determine if CREATE or EDIT mode
+    // echo "<script>alert('id = $id';)</script>";   // D
+
+    $sql = "DELETE FROM rent WHERE id = $id";
+
+    if (mysqli_query($conn, $sql)) {
+        // echo "<script>alert('Created successfully.')</script>";
+        echo "<script>window.location.href='$url/rent/index.php';</script>";
     } else {
         echo "<script>alert('user_id = $user_id ; pay_date = $pay_date; amount = $amount; remarks = $remarks; id = $id')</script>";
         echo "<script>alert('sql = $sql')</script>";
@@ -97,7 +116,8 @@ if (isset($_POST['create'])) {
                                                     <button class="btn btn-sm btn-info" onclick='editModal(<?= json_encode($row) ?>)'>
                                                         Edit
                                                     </button>
-                                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/rent/destroy/2' }">
+                                                    <!-- <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/rent/destroy/2' }"> -->
+                                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='<?= $url ?>/rent/index.php?delete=' + <?= $row['id'] ?> }">
                                                         Delete
                                                     </button>
                                                 </td>
