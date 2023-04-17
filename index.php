@@ -2,6 +2,7 @@
 require_once('config.php');
 
 $error_msg = '';
+$is_master_admin = "true";   // don't why cannot use bool (eg. true, false)
 
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
@@ -9,8 +10,9 @@ if (isset($_POST['login'])) {
     /* echo '$username = ' . $username;
     echo '$password = ' . $password; */
 
+    // master superadmin START
     // chk if password is matched in database record
-    $get_admin_data = mysqli_query($conn, "SELECT * FROM administration where username = '$username' AND password = '$password'");   // TODO: filter active status only
+    $get_admin_data = mysqli_query($conn, "SELECT * FROM administration where username = '$username' AND password = '$password'");
 
     if (mysqli_num_rows($get_admin_data) > 0) {
         $rowadmin = mysqli_fetch_assoc($get_admin_data);
@@ -34,9 +36,51 @@ if (isset($_POST['login'])) {
         <script>
             window.location.replace("<?= SITEURL ?>/home.php");
         </script>
-<?php
+        <?php
     } else {
-        $error_msg = 'These credentials do not match our records.';   // OPT 'Wrong password. Try Again.', 'Login Credential Incorrect.';
+        $is_master_admin = "false";
+        // $error_msg = 'These credentials do not match our records.';   // OPT 'Wrong password. Try Again.', 'Login Credential Incorrect.';
+    }
+    // master superadmin END
+
+    /* echo "<script>alert('error_msg = $error_msg')</script>";   // D
+    echo "<script>alert('is_master_admin = $is_master_admin')</script>"; */
+
+    if ($is_master_admin == "false") {
+        // echo "<script>alert('is_master_admin = $is_master_admin')</script>";   // D
+
+        // master superadmin START
+        // chk if password is matched in database record
+        $get_admin_data = mysqli_query($conn, "SELECT * FROM users where username = '$username' AND password = '$password' AND status = 'Active'");
+
+        if (mysqli_num_rows($get_admin_data) > 0) {
+            $rowadmin = mysqli_fetch_assoc($get_admin_data);
+
+            // set SESSION
+            // $_SESSION["group_name"] = 'superadmin';
+            // TODO: double logic from 'users' or 'superadmin' table
+            $_SESSION["user_id"] = $rowadmin['id'];
+            $_SESSION["upline"] = $rowadmin['id'];
+
+            // TODO: get last login
+            // $sql_hwe = "select * from " . $table_prefix . "recently_login order by date desc LIMIT 0,1";
+
+            // $results_hwe = mysqli_query($conn, $sql_hwe);
+
+            // if (mysqli_num_rows($results_hwe) > 0) {
+            // 	$row_login = mysqli_fetch_assoc($results_hwe);
+            // 	$_SESSION['last_login'] = $row_login['user_id'];
+            // }
+        ?>
+            <script>
+                window.location.replace("<?= SITEURL ?>/home.php");
+            </script>
+<?php
+        } else {
+            // $is_master_admin = "false";
+            $error_msg = 'These credentials do not match our records or this user is inactived.';   // OPT 'Wrong password. Try Again.', 'Login Credential Incorrect.';
+        }
+        // master superadmin END
     }
 }
 ?>
