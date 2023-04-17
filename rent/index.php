@@ -98,7 +98,6 @@ if (isset($_GET['delete'])) {
                                     // echo "<script>alert('sql = $sql')</script>";   // D
                                     $result = mysqli_query($conn, $sql);
                                     if ($result->num_rows > 0) {
-                                        $count = 0;
 
                                         while ($row = $result->fetch_assoc()) {
                                             /* echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
@@ -159,7 +158,6 @@ if (isset($_GET['delete'])) {
                                     // echo "<script>alert('sql = $sql')</script>";   // D
                                     $result = mysqli_query($conn, $sql);
                                     if ($result->num_rows > 0) {
-                                        $count = 0;
 
                                         while ($row = $result->fetch_assoc()) {
                                             /* echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
