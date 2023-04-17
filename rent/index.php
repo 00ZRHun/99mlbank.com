@@ -1,5 +1,40 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
+
+// create rent
+if (isset($_POST['create'])) {
+
+    $user_id = $_POST['user_id'];
+    $pay_date = $_POST['pay_date'];
+    $amount = $_POST['amount'];
+    $remarks = $_POST['remarks'];
+
+    /* $role = "Superadmins";
+    $upline = $_SESSION["upline"];
+    $status = "Active"; */
+
+    // if id empty, then create new rent, else update old rent
+    $id = $_POST['rent_id'];   // use to determine if CREATE or EDIT mode
+    // echo "<script>alert('id = $id';)</script>";   // D
+
+    if ($id == "") {
+        // echo "<script>alert('CREATE')</script>";   // D
+        $sql = "INSERT INTO rent (user_id, pay_date, amount, remarks) VALUES
+            ('$user_id', '$pay_date', '$amount', '$remarks')";
+    } else {
+        // echo "<script>alert('EDIT')</script>";   // D
+        $sql = "UPDATE users SET name = '$name', 
+            contact = '$contact' WHERE id = $id";
+    }
+
+    if (mysqli_query($conn, $sql)) {
+        echo "<script>alert('Created successfully.')</script>";
+    } else {
+        echo "<script>alert('available = $available')</script>";
+        echo "<script>alert('sql = $sql')</script>";
+        echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
+    }
+}
 ?>
 
 <div class="app-content  my-3 my-md-5">
@@ -41,7 +76,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
                                     $upline = $_SESSION["upline"];
                                     // echo '$upline = ' . $upline; */
                                     // $sql = "SELECT * FROM users WHERE upline = $upline";
-                                    $sql = "SELECT rt.*, us.name FROM rent as rt left join users as us ON rt.superadmin = us.id";
+                                    $sql = "SELECT rt.*, us.name FROM rent as rt left join users as us ON rt.user_id = us.id";
                                     // echo "<script>alert('sql = $sql')</script>";   // D
                                     $result = mysqli_query($conn, $sql);
                                     if ($result->num_rows > 0) {
@@ -88,15 +123,35 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form enctype="multipart/form-data" method="post" action="https://bankcardsample.system1906.com/rent/store">
+                    <form enctype="multipart/form-data" method="post"> <!-- OPT:  action="https://bankcardsample.system1906.com/rent/store" -->
                         <input type="hidden" name="_token" value="CPFPhQYqgjmerci3K7AcwkfKWNWFDBWeRvcTb2pe">
                         <div class="modal-body pd-20">
                             <input type="text" class="form-control" name="rent_id" id="rent_id" hidden>
                             <div class="form-group">
                                 <label class="form-label" for="exampleInputEmail1">Superadmin</label>
                                 <select class="form-control" name="user_id" id="user_id">
-                                    <option value="3">12122</option>
-                                    <option value="5">Name</option>
+                                    <!-- list users -->
+                                    <?php
+                                    // get upline from SESSION (index.php)
+                                    $upline = $_SESSION["upline"];
+                                    // echo '$upline = ' . $upline;
+                                    $sql = "SELECT * FROM users WHERE upline = $upline";
+                                    // echo "<script>alert('sql = $sql')</script>";   // D
+                                    $result = mysqli_query($conn, $sql);
+                                    if ($result->num_rows > 0) {
+                                        $count = 0;
+
+                                        while ($row = $result->fetch_assoc()) {
+                                            /* echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
+                                            echo "<script>alert('Debug: username = " . $row["username"] . "')</script>";   // D */
+                                    ?>
+                                            <!-- <option value="3">12122</option> -->
+                                            <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+
                                 </select>
                             </div>
                             <div class="form-group">
@@ -113,7 +168,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
                             </div>
                         </div><!-- modal-body -->
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary" name="create">Save changes</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
