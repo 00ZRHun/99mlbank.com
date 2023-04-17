@@ -58,7 +58,6 @@ if (isset($_GET['resetPassword'])) {
     }
 }
 
-
 // inactive / active user
 if (isset($_GET['setInactive'])) {
     // get required data
