@@ -82,6 +82,7 @@ if (isset($_GET['setInactive'])) {
 
     if (mysqli_query($conn, $sql)) {
         echo "<script>alert('Status updated successfully.')</script>";
+        echo "<script>window.location.replace('$url/user/index/Superadmins/index.php');</script>";
     } else {
         echo "<script>alert('available = $available')</script>";
         echo "<script>alert('sql = $sql')</script>";
@@ -146,6 +147,7 @@ function getOppositeStatus($status)
                                     $upline = $_SESSION["upline"];
                                     // echo '$upline = ' . $upline;
                                     $sql = "SELECT * FROM users WHERE upline = $upline";
+                                    // echo "<script>alert('sql = $sql')</script>";   // D
                                     $result = mysqli_query($conn, $sql);
                                     if ($result->num_rows > 0) {
                                         $count = 0;
