@@ -321,7 +321,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-money"></i><span class="side-menu__label">Rent Pay</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<a href="../rent/index" class="slide-item">Listing</a>
+								<a href="<?= SITEURL ?>/rent/index" class="slide-item">Listing</a> <!-- OPT: ../rent/index -->
 							</li>
 						</ul>
 					</li>
@@ -329,7 +329,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-money"></i><span class="side-menu__label">Expenses</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<a href="../expense/index" class="slide-item">Listing</a>
+								<a href="<?= SITEURL ?>/expense/index" class="slide-item">Listing</a> <!-- OPT: ../expense/index -->
 							</li>
 						</ul>
 					</li>
@@ -337,7 +337,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-database"></i><span class="side-menu__label">Customers Settings</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<a href="../customer/index" class="slide-item">Customer</a>
+								<a href="<?= SITEURL ?>/customer/index" class="slide-item">Customer</a> <!-- OPT: ../customer/index -->
 							</li>
 						</ul>
 					</li>
@@ -345,7 +345,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-database"></i><span class="side-menu__label">Cards Settings</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<a href="../card/superadmin_index" class="slide-item">All Cards</a>
+								<a href="<?= SITEURL ?>/card/superadmin_index" class="slide-item">All Cards</a> <!-- OPT: ../card/superadmin_index -->
 							</li>
 						</ul>
 					</li>
@@ -353,13 +353,13 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-user"></i><span class="side-menu__label">Users Settings</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<a href="../user/superadmin_index" class="slide-item">Superadmins</a>
+								<a href="<?= SITEURL ?>/user/superadmin_index" class="slide-item">Superadmins</a> <!-- OPT: ../user/superadmin_index -->
 							</li>
 							<li>
-								<a href="../user/admin_index" class="slide-item">Admins</a>
+								<a href="<?= SITEURL ?>/user/admin_index" class="slide-item">Admins</a> <!-- OPT: ../user/admin_index -->
 							</li>
 							<li>
-								<a href="../user/agent_index" class="slide-item">Agents</a>
+								<a href="<?= SITEURL ?>/user/agent_index" class="slide-item">Agents</a> <!-- OPT: ../user/agent_index -->
 							</li>
 						</ul>
 					</li>
@@ -367,7 +367,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">Banks Settings</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<a href="../bank/index" class="slide-item">Listing</a>
+								<a href="<?= SITEURL ?>/bank/index" class="slide-item">Listing</a> <!-- OPT: ../bank/index -->
 							</li>
 						</ul>
 					</li>
@@ -375,7 +375,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">Announcement</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<a href="../announcement/index" class="slide-item">Listing</a>
+								<a href="<?= SITEURL ?>/announcement/index" class="slide-item">Listing</a> <!-- OPT: ../announcement/index -->
 							</li>
 						</ul>
 					</li>
@@ -393,7 +393,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">My Cards</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<a href="../card/index" class="slide-item">Card Details</a>
+								<a href="<?= SITEURL ?>/card/index" class="slide-item">Card Details</a> <!-- OPT: ../card/index -->
 							</li>
 						</ul>
 					</li>
