@@ -1,6 +1,59 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
+
+// create or edit expense
+if (isset($_POST['create'])) {
+
+    $description = $_POST['description'];
+    $claim_date = $_POST['claim_date'];
+    $amount = $_POST['amount'];
+
+    /* $role = "Superadmins";
+    $upline = $_SESSION["upline"];
+    $status = "Active"; */
+
+    // if id empty, then create new expense, else update old expense
+    $id = $_POST['expense_id'];   // use to determine if CREATE or EDIT mode
+    // echo "<script>alert('id = $id';)</script>";   // D
+
+    if ($id == "") {
+        // echo "<script>alert('CREATE')</script>";   // D
+        $sql = "INSERT INTO expense (description, claim_date, amount) VALUES
+            ('$description', '$claim_date', '$amount')";
+    } else {
+        // echo "<script>alert('EDIT')</script>";   // D
+        $sql = "UPDATE expense SET description = '$description', claim_date = '$claim_date', amount = '$amount' WHERE id = $id";
+    }
+
+    if (mysqli_query($conn, $sql)) {
+        // echo "<script>alert('Created successfully.')</script>";
+    } else {
+        echo "<script>alert('description = $description ; claim_date = $claim_date; amount = $amount; id = $id')</script>";
+        echo "<script>alert('sql = $sql')</script>";
+        echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
+    }
+}
+
+// delete expense
+if (isset($_GET['delete'])) {
+
+    $id = $_GET['delete'];   // use to determine if CREATE or EDIT mode
+    // echo "<script>alert('id = $id';)</script>";   // D
+
+    $sql = "DELETE FROM expense WHERE id = $id";
+
+    if (mysqli_query($conn, $sql)) {
+        // echo "<script>alert('Created successfully.')</script>";
+        echo "<script>window.location.href='$url/expense/index.php';</script>";
+        // echo "<script>window.location.href='" . SITEURL . "/expense/index.php';</script>";   // ditto
+    } else {
+        echo "<script>alert('id = $id')</script>";
+        echo "<script>alert('sql = $sql')</script>";
+        echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
+    }
+}
 ?>
+
 <div class="app-content  my-3 my-md-5">
     <div class="side-app">
         <marquee style="padding:8px;background-color:#FDD58C"><b>要好好的做，努力赚钱，美好未来！</b></marquee>
@@ -33,48 +86,41 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>2023-04-12</td>
-                                        <td>buy ps</td>
-                                        <td>222</td>
-                                        <td>April 2023</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:1,&quot;claim_date&quot;:&quot;2023-04-12&quot;,&quot;month&quot;:&quot;4&quot;,&quot;year&quot;:&quot;2023&quot;,&quot;description&quot;:&quot;buy ps&quot;,&quot;amount&quot;:222,&quot;created_at&quot;:&quot;2023-04-11T01:24:53.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T02:19:03.000000Z&quot;,&quot;deleted_at&quot;:null})">
-                                                Edit
-                                            </button>
-                                            <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/expense/destroy/1' }">
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2023-04-12</td>
-                                        <td>buy car</td>
-                                        <td>100</td>
-                                        <td>April 2023</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:2,&quot;claim_date&quot;:&quot;2023-04-12&quot;,&quot;month&quot;:&quot;4&quot;,&quot;year&quot;:&quot;2023&quot;,&quot;description&quot;:&quot;buy car&quot;,&quot;amount&quot;:100,&quot;created_at&quot;:&quot;2023-04-11T02:28:42.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T02:28:42.000000Z&quot;,&quot;deleted_at&quot;:null})">
-                                                Edit
-                                            </button>
-                                            <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/expense/destroy/2' }">
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2023-05-17</td>
-                                        <td>Description</td>
-                                        <td>100</td>
-                                        <td>May 2023</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:3,&quot;claim_date&quot;:&quot;2023-05-17&quot;,&quot;month&quot;:&quot;5&quot;,&quot;year&quot;:&quot;2023&quot;,&quot;description&quot;:&quot;Description&quot;,&quot;amount&quot;:100,&quot;created_at&quot;:&quot;2023-04-17T13:53:52.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-17T13:53:52.000000Z&quot;,&quot;deleted_at&quot;:null})">
-                                                Edit
-                                            </button>
-                                            <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/expense/destroy/3' }">
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    <!-- list expenses -->
+                                    <?php
+                                    /* // get upline from SESSION (index.php)
+                                    $upline = $_SESSION["upline"];
+                                    // echo '$upline = ' . $upline; */
+                                    // $sql = "SELECT * FROM users WHERE upline = $upline";
+                                    $sql = "SELECT * FROM expense";
+                                    // echo "<script>alert('sql = $sql')</script>";   // D
+                                    $result = mysqli_query($conn, $sql);
+                                    if ($result->num_rows > 0) {
+
+                                        while ($row = $result->fetch_assoc()) {
+                                            /* echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
+                                            echo "<script>alert('Debug: username = " . $row["username"] . "')</script>";   // D */
+                                    ?>
+                                            <tr>
+                                                <td><?= $row['claim_date'] ?></td> <!-- OPT: 2023-05-17 -->
+                                                <td><?= $row['description'] ?></td> <!-- OPT: Description -->
+                                                <td><?= $row['amount'] ?></td> <!-- OPT: 100 -->
+                                                <td><?= date('F y', strtotime($row['claim_date'])) ?></td> <!-- OPT: May 2023 -->
+                                                <td>
+                                                    <!-- <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:3,&quot;claim_date&quot;:&quot;2023-05-17&quot;,&quot;month&quot;:&quot;5&quot;,&quot;year&quot;:&quot;2023&quot;,&quot;description&quot;:&quot;Description&quot;,&quot;amount&quot;:100,&quot;created_at&quot;:&quot;2023-04-17T13:53:52.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-17T13:53:52.000000Z&quot;,&quot;deleted_at&quot;:null})"> -->
+                                                    <button class="btn btn-sm btn-info" onclick='editModal(<?= json_encode($row) ?>)'>
+                                                        Edit
+                                                    </button>
+                                                    <!-- <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/expense/destroy/3' }"> -->
+                                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='<?= $url ?>/expense/index.php?delete=' + <?= $row['id'] ?> }">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
 
@@ -92,7 +138,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form enctype="multipart/form-data" method="post" action="https://bankcardsample.system1906.com/expense/store">
+                    <form enctype="multipart/form-data" method="post"> <!-- OPT:  action="https://bankcardsample.system1906.com/expense/store" -->
                         <input type="hidden" name="_token" value="CPFPhQYqgjmerci3K7AcwkfKWNWFDBWeRvcTb2pe">
                         <div class="modal-body pd-20">
                             <div class="form-group">
@@ -110,7 +156,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
                             </div>
                         </div><!-- modal-body -->
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary" name="create">Save changes</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
@@ -129,7 +175,15 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
             }
 
             function editModal(data) {
+                /* // alert("DEBUG: data = " + data);   // D
+                alert("DEBUG: data = " + JSON.stringify(data));
+                alert("DEBUG: data['contact'] = " + data['contact']);
+                alert("DEBUG: data.contact = " + data.contact); */
 
+                // open modal
+                $("#largeModal").modal();
+
+                // get data from json & assign to dom field
                 $("#largeModal").modal();
                 document.getElementById("expense_id").value = data.id;
                 document.getElementById("description").value = data.description;
