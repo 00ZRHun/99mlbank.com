@@ -23,14 +23,14 @@ if (isset($_POST['create'])) {
             ('$user_id', '$pay_date', '$amount', '$remarks')";
     } else {
         // echo "<script>alert('EDIT')</script>";   // D
-        $sql = "UPDATE users SET name = '$name', 
-            contact = '$contact' WHERE id = $id";
+        $sql = "UPDATE rent SET user_id = '$user_id', pay_date = '$pay_date', amount = '$amount', remarks = '$remarks' WHERE id = $id";
     }
 
     if (mysqli_query($conn, $sql)) {
         echo "<script>alert('Created successfully.')</script>";
     } else {
         echo "<script>alert('available = $available')</script>";
+        echo "<script>alert('user_id = $user_id ; pay_date = $pay_date; amount = $amount; remarks = $remarks; id = $id')</script>";
         echo "<script>alert('sql = $sql')</script>";
         echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
     }
@@ -94,7 +94,8 @@ if (isset($_POST['create'])) {
                                                 <td><?= date('F Y', strtotime($row['pay_date'])) ?> <!-- OPT: April 2023 -->
                                                 <td><?= $row['remarks'] ?></td> <!-- OPT: for emergency -->
                                                 <td>
-                                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:2,&quot;pay_date&quot;:&quot;2023-04-11&quot;,&quot;month&quot;:&quot;4&quot;,&quot;year&quot;:&quot;2023&quot;,&quot;user_id&quot;:3,&quot;amount&quot;:1111,&quot;remarks&quot;:&quot;for emergency&quot;,&quot;created_at&quot;:&quot;2023-04-11T02:17:22.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T02:18:04.000000Z&quot;,&quot;deleted_at&quot;:null,&quot;rental&quot;:{&quot;id&quot;:3,&quot;name&quot;:&quot;12122&quot;,&quot;username&quot;:&quot;admin111&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Superadmins&quot;,&quot;contact_no&quot;:&quot;11112&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:34:53.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-13T20:21:32.000000Z&quot;}})">
+                                                    <!-- <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:2,&quot;pay_date&quot;:&quot;2023-04-11&quot;,&quot;month&quot;:&quot;4&quot;,&quot;year&quot;:&quot;2023&quot;,&quot;user_id&quot;:3,&quot;amount&quot;:1111,&quot;remarks&quot;:&quot;for emergency&quot;,&quot;created_at&quot;:&quot;2023-04-11T02:17:22.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T02:18:04.000000Z&quot;,&quot;deleted_at&quot;:null,&quot;rental&quot;:{&quot;id&quot;:3,&quot;name&quot;:&quot;12122&quot;,&quot;username&quot;:&quot;admin111&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Superadmins&quot;,&quot;contact_no&quot;:&quot;11112&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:34:53.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-13T20:21:32.000000Z&quot;}})"> -->
+                                                    <button class="btn btn-sm btn-info" onclick='editModal(<?= json_encode($row) ?>)'>
                                                         Edit
                                                     </button>
                                                     <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/rent/destroy/2' }">
@@ -188,8 +189,15 @@ if (isset($_POST['create'])) {
             }
 
             function editModal(data) {
+                /* // alert("DEBUG: data = " + data);   // D
+                alert("DEBUG: data = " + JSON.stringify(data));
+                alert("DEBUG: data['contact'] = " + data['contact']);
+                alert("DEBUG: data.contact = " + data.contact); */
 
+                // open modal
                 $("#largeModal").modal();
+
+                // get data from json & assign to dom field
                 document.getElementById("rent_id").value = data.id;
                 document.getElementById("user_id").value = data.user_id;
                 document.getElementById("remarks").value = data.remarks;
