@@ -78,7 +78,7 @@ if (isset($_POST['changePassword'])) {
                 </button>
             </div>
             <form enctype="multipart/form-data" method="post"> <!-- OPT:  action="https://bankcardsample.system1906.com/user/changePassword" // action="../user/changePassword" -->
-                <input type="hidden" name="_token" value="CPFPhQYqgjmerci3K7AcwkfKWNWFDBWeRvcTb2pe"> <!-- OPT: value="zZmMzS63qa18RXY01BZGv6chzLXG1ppo7j1x0Zub" // 9B3G2dwuUKn73RAbFXEmH43EsCyyg3ylJzuxxmjP -->
+                <input type="hidden" name="_token" value="CPFPhQYqgjmerci3K7AcwkfKWNWFDBWeRvcTb2pe"> <!-- OPT: value="zZmMzS63qa18RXY01BZGv6chzLXG1ppo7j1x0Zub" // 9B3G2dwuUKn73RAbFXEmH43EsCyyg3ylJzuxxmjP // PqtUCFMuJNkIkZ2y5bubR3BkrqRCILp7VRQexTwP -->
                 <div class="modal-body pd-20">
                     <div class="form-group">
                         <label for="change-password"><b>Current password</b></label>
