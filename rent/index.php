@@ -90,8 +90,8 @@ if (isset($_GET['delete'])) {
                             /* // get upline from SESSION (index.php)
                                     $upline = $_SESSION["upline"];
                                     // echo '$upline = ' . $upline; */
-                            // $sql = "SELECT * FROM users WHERE upline = $upline";
-                            $sql = "SELECT rt.*, us.name FROM rent as rt left join users as us ON rt.user_id = us.id";
+                            // $sql = "SELECT * FROM `user` WHERE upline = $upline";
+                            $sql = "SELECT rt.*, us.name FROM rent as rt left join `user` as us ON rt.user_id = us.id";
                             // echo "<script>alert('sql = $sql')</script>";   // D
                             $result = mysqli_query($conn, $sql);
                             if ($result->num_rows > 0) {
@@ -151,7 +151,7 @@ if (isset($_GET['delete'])) {
                             // get upline from SESSION (index.php)
                             $upline = $_SESSION["upline"];
                             // echo '$upline = ' . $upline;
-                            $sql = "SELECT * FROM users WHERE upline = $upline";
+                            $sql = "SELECT * FROM `user` WHERE upline = $upline";
                             // echo "<script>alert('sql = $sql')</script>";   // D
                             $result = mysqli_query($conn, $sql);
                             if ($result->num_rows > 0) {

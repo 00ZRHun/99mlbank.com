@@ -10,13 +10,13 @@ if (isset($_POST['login'])) {
     /* echo '$username = ' . $username;
     echo '$password = ' . $password; */
 
-    // double logic from 'superadmin' or 'users' table
+    // double logic from 'superadmin' or 'user' table
     // 1) master superadmin START
     // chk if password is matched in database record
     $get_admin_data = mysqli_query($conn, "SELECT * FROM administration where username = '$username' AND password = '$password'");
     /* $get_admin_data = mysqli_query($conn, "SELECT id, name, username FROM administration where username = '$username' AND password = '$password'
         UNION
-        SELECT id, name, username FROM users where username = '$username' AND password = '$password' AND status = 'Active'"); */
+        SELECT id, name, username FROM `user` where username = '$username' AND password = '$password' AND status = 'Active'"); */
 
     if (mysqli_num_rows($get_admin_data) > 0) {
         $rowadmin = mysqli_fetch_assoc($get_admin_data);
@@ -55,14 +55,14 @@ if (isset($_POST['login'])) {
 
         // 2) superadmin START
         // chk if password is matched in database record
-        $get_admin_data = mysqli_query($conn, "SELECT * FROM users where username = '$username' AND password = '$password' AND status = 'Active'");   // filter active status only
+        $get_admin_data = mysqli_query($conn, "SELECT * FROM `user` where username = '$username' AND password = '$password' AND status = 'Active'");   // filter active status only
 
         if (mysqli_num_rows($get_admin_data) > 0) {
             $rowadmin = mysqli_fetch_assoc($get_admin_data);
 
             // set SESSION
             // $_SESSION["group_name"] = 'superadmin';
-            $_SESSION["user_table"] = "users";
+            $_SESSION["user_table"] = "user";
             $_SESSION["user_id"] = $rowadmin['id'];
             $_SESSION["upline"] = $rowadmin['id'];
 

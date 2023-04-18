@@ -88,7 +88,7 @@ if (isset($_GET['delete'])) {
                             /* // get upline from SESSION (index.php)
                                     $upline = $_SESSION["upline"];
                                     // echo '$upline = ' . $upline; */
-                            // $sql = "SELECT * FROM users WHERE upline = $upline";
+                            // $sql = "SELECT * FROM `user` WHERE upline = $upline";
                             $sql = "SELECT * FROM expense";
                             // echo "<script>alert('sql = $sql')</script>";   // D
                             $result = mysqli_query($conn, $sql);

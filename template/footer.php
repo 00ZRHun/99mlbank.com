@@ -27,7 +27,7 @@ if (isset($_POST['changePassword'])) {
     // TODO: chk "$var", "'$var'", "'" . $var . "'"
     $sql = "SELECT password FROM $user_table WHERE id = $user_id";
     // echo "<script>alert('Debug: sql = $sql')</script>";   // D
-    // $search_query = "SELECT * FROM users WHERE id = $user_id";
+    // $search_query = "SELECT * FROM `user` WHERE id = $user_id";
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
         /* while ($row = $result->fetch_assoc()) {
@@ -49,7 +49,7 @@ if (isset($_POST['changePassword'])) {
     } else {
         // update password
         // $password = "123456789";
-        // $sql = "UPDATE users SET password = '" . $password . "' WHERE id = $id";
+        // $sql = "UPDATE `user` SET password = '" . $password . "' WHERE id = $id";
         // $sql = "UPDATE $user_table SET password = '" . $password . "' WHERE id = $user_id";
         $sql = "UPDATE $user_table SET password = $password WHERE id = $user_id";   // ditto
         // echo "<script>alert('Debug: sql = $sql')</script>";   // D

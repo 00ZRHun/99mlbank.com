@@ -13,7 +13,7 @@ if (isset($_POST['create'])) {
     $status = "Active";
 
     // popup err msg if Username is taken 
-    $sql = "SELECT * FROM users WHERE username = '$username'";   // * REMEMBER to use single quote (else got error if user enter 'testing')
+    $sql = "SELECT * FROM `user` WHERE username = '$username'";   // * REMEMBER to use single quote (else got error if user enter 'testing')
     // echo "<script>alert('Debug: sql = $sql')</script>";   // D
     $result = mysqli_query($conn, $sql);
     $available = ($result->num_rows > 0) ? false : true;
@@ -26,11 +26,11 @@ if (isset($_POST['create'])) {
 
         if ($id == "") {
             // echo "<script>alert('CREATE')</script>";   // D
-            $sql = "INSERT INTO users (username, name, contact, role, upline, status) VALUES
+            $sql = "INSERT INTO `user` (username, name, contact, role, upline, status) VALUES
                 ('$username', '$name', '$contact', '$role', '$upline', '$status')";
         } else {
             // echo "<script>alert('EDIT')</script>";   // D
-            $sql = "UPDATE users SET name = '$name', 
+            $sql = "UPDATE `user` SET name = '$name', 
                 contact = '$contact' WHERE id = $id";
         }
 
@@ -54,7 +54,7 @@ if (isset($_GET['resetPassword'])) {
 
     // update password
     $password = "123456789";
-    $sql = "UPDATE users SET password = '" . $password . "' WHERE id = $id";
+    $sql = "UPDATE `user` SET password = '" . $password . "' WHERE id = $id";
     /* echo "<script>alert('resetPassword; id = $id; password = $password')</script>";   // D
     echo "<script>alert('sql = $sql')</script>"; */
 
@@ -74,7 +74,7 @@ if (isset($_GET['setInactive'])) {
     $id = $_GET['setInactive'];
     $status = "";
     // $status = "Inactive";
-    $sql = "SELECT status FROM users WHERE id = $id";
+    $sql = "SELECT status FROM `user` WHERE id = $id";
     // echo "<script>alert('sql = $sql')</script>";
     $res = mysqli_query($conn, $sql);
     while ($myrow = mysqli_fetch_array($res)) {
@@ -85,7 +85,7 @@ if (isset($_GET['setInactive'])) {
     echo "<script>alert('res = $res')</script>"; */
 
     // update status
-    $sql = "UPDATE users SET status = '" . $status . "' WHERE id = $id";
+    $sql = "UPDATE `user` SET status = '" . $status . "' WHERE id = $id";
     /* echo "<script>alert('setInactive; id = $id; status = $status')</script>";   // D
     echo "<script>alert('sql = $sql')</script>"; */
 
@@ -152,7 +152,7 @@ function getOppositeStatus($status)
                             // get upline from SESSION (index.php)
                             $upline = $_SESSION["upline"];
                             // echo '$upline = ' . $upline;
-                            $sql = "SELECT * FROM users WHERE role = '$role' AND upline = $upline";   // filter Superadmins role only
+                            $sql = "SELECT * FROM `user` WHERE role = '$role' AND upline = $upline";   // filter Superadmins role only
                             // echo "<script>alert('sql = $sql')</script>";   // D
                             $result = mysqli_query($conn, $sql);
                             if ($result->num_rows > 0) {

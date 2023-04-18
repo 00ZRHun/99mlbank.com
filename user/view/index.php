@@ -6,8 +6,8 @@ if (isset($_GET['user'])) {
     // echo "<script>alert('Debug: user_id = $user_id')</script>";   // D
 
     // get single data - find user by id
-    $sql = "SELECT * FROM users WHERE id = $user_id";
-    // $search_query = "SELECT * FROM users WHERE id = $user_id";
+    $sql = "SELECT * FROM `user` WHERE id = $user_id";
+    // $search_query = "SELECT * FROM `user` WHERE id = $user_id";
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
         /* while ($row = $result->fetch_assoc()) {
