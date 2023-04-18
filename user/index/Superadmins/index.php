@@ -261,37 +261,5 @@ function getOppositeStatus($status)
         </script>
     </div>
 </div>
-</div>
-<div id="changePassModal" class="modal fade">
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content ">
-            <div class="modal-header pd-x-20">
-                <h4 class="modal-title font-weight-bold">Change Password</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form enctype="multipart/form-data" method="post" action="../user/changePassword">
-                <input type="hidden" name="_token" value="zZmMzS63qa18RXY01BZGv6chzLXG1ppo7j1x0Zub">
-                <div class="modal-body pd-20">
-                    <div class="form-group">
-                        <label for="change-password"><b>Current password</b></label>
-                        <input type="password" class="form-control " name="current_password" autocomplete="current_password" placeholder="Current Password..">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control " name="password" autocomplete="password" placeholder="New Password..">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control " name="password_confirmation" autocomplete="password_confirmation" placeholder="Confirm Password..">
-                    </div>
-                </div><!-- modal-body -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </form>
-        </div>
-    </div><!-- modal-dialog -->
-</div>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/template/footer.php'); ?>

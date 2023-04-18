@@ -23,6 +23,7 @@ if (isset($_POST['login'])) {
 
         // set SESSION
         // $_SESSION["group_name"] = 'superadmin';
+        $_SESSION["user_table"] = "administration";
         $_SESSION["user_id"] = $rowadmin['id'];
         $_SESSION["upline"] = $rowadmin['id'];
 
@@ -61,6 +62,7 @@ if (isset($_POST['login'])) {
 
             // set SESSION
             // $_SESSION["group_name"] = 'superadmin';
+            $_SESSION["user_table"] = "users";
             $_SESSION["user_id"] = $rowadmin['id'];
             $_SESSION["upline"] = $rowadmin['id'];
 
