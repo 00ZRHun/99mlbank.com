@@ -6,36 +6,44 @@ $role = "Superadmins";
 
 // create user
 if (isset($_POST['create'])) {
-    $available = true;
-
     $username = $_POST['username'];
     $name = $_POST['name'];
     $contact = $_POST['contact_no'];
     $upline = $_SESSION["upline"];
     $status = "Active";
 
-    // if id empty, then create new user, else update old user
-    $id = $_POST['user_id'];   // use to determine if CREATE or EDIT mode
-    // echo "<script>alert('id = $id';)</script>";   // D
+    // popup err msg if Username is taken 
+    $sql = "SELECT * FROM users WHERE username = '$username'";   // * REMEMBER to use single quote (else got error if user enter 'testing')
+    // echo "<script>alert('Debug: sql = $sql')</script>";   // D
+    $result = mysqli_query($conn, $sql);
+    $available = ($result->num_rows > 0) ? false : true;
+    // echo "<script>alert('available = $available')</script>";
 
-    if ($id == "") {
-        // echo "<script>alert('CREATE')</script>";   // D
-        $sql = "INSERT INTO users (username, name, contact, role, upline, status) VALUES
-            ('$username', '$name', '$contact', '$role', '$upline', '$status')";
+    if ($available) {   // filter available username only
+        // if id empty, then create new user, else update old user
+        $id = $_POST['user_id'];   // use to determine if CREATE or EDIT mode
+        // echo "<script>alert('id = $id';)</script>";   // D
+
+        if ($id == "") {
+            // echo "<script>alert('CREATE')</script>";   // D
+            $sql = "INSERT INTO users (username, name, contact, role, upline, status) VALUES
+                ('$username', '$name', '$contact', '$role', '$upline', '$status')";
+        } else {
+            // echo "<script>alert('EDIT')</script>";   // D
+            $sql = "UPDATE users SET name = '$name', 
+                contact = '$contact' WHERE id = $id";
+        }
+
+        // show success message is successful else error message
+        if (mysqli_query($conn, $sql)) {
+            echo "<script>alert('Created successfully.')</script>";
+        } else {
+            echo "<script>alert('available = $available')</script>";
+            echo "<script>alert('sql = $sql')</script>";
+            echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
+        }
     } else {
-        // echo "<script>alert('EDIT')</script>";   // D
-        $sql = "UPDATE users SET name = '$name', 
-            contact = '$contact' WHERE id = $id";
-    }
-
-    // TODO: popup err msg if Username is taken 
-
-    if (mysqli_query($conn, $sql)) {
-        echo "<script>alert('Created successfully.')</script>";
-    } else {
-        echo "<script>alert('available = $available')</script>";
-        echo "<script>alert('sql = $sql')</script>";
-        echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
+        echo "<script>alert('Your username has been duplicated, please modify it and try again.')</script>";
     }
 }
 
