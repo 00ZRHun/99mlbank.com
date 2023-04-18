@@ -416,3 +416,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						</a>
 					</div> -->
 			</aside>
+
+			<div class="app-content  my-3 my-md-5">
+				<div class="side-app">
+					<marquee style="padding:8px;background-color:#FDD58C"><b>要好好的做，努力赚钱，美好未来！</b></marquee>
