@@ -1,6 +1,9 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
 
+// global variable
+$role = "Superadmins";
+
 // create user
 if (isset($_POST['create'])) {
     $available = true;
@@ -8,7 +11,6 @@ if (isset($_POST['create'])) {
     $username = $_POST['username'];
     $name = $_POST['name'];
     $contact = $_POST['contact_no'];
-    $role = "Superadmins";
     $upline = $_SESSION["upline"];
     $status = "Active";
 
@@ -142,7 +144,7 @@ function getOppositeStatus($status)
                             // get upline from SESSION (index.php)
                             $upline = $_SESSION["upline"];
                             // echo '$upline = ' . $upline;
-                            $sql = "SELECT * FROM users WHERE upline = $upline";
+                            $sql = "SELECT * FROM users WHERE role = '$role' AND upline = $upline";   // filter Superadmins role only
                             // echo "<script>alert('sql = $sql')</script>";   // D
                             $result = mysqli_query($conn, $sql);
                             if ($result->num_rows > 0) {
