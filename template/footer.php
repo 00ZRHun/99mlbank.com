@@ -82,13 +82,13 @@ if (isset($_POST['changePassword'])) {
                 <div class="modal-body pd-20">
                     <div class="form-group">
                         <label for="change-password"><b>Current password</b></label>
-                        <input type="password" class="form-control " name="current_password" autocomplete="current_password" placeholder="Current Password..">
+                        <input type="password" class="form-control " name="current_password" autocomplete="current_password" placeholder="Current Password.." required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control " name="password" autocomplete="password" placeholder="New Password..">
+                        <input type="password" class="form-control " name="password" autocomplete="password" placeholder="New Password.." required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control " name="password_confirmation" autocomplete="password_confirmation" placeholder="Confirm Password..">
+                        <input type="password" class="form-control " name="password_confirmation" autocomplete="password_confirmation" placeholder="Confirm Password.." required>
                     </div>
                 </div><!-- modal-body -->
                 <div class="modal-footer">
