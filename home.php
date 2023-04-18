@@ -34,7 +34,5 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
         </div>
     </div>
 </div>
-</div>
-</div>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] .  '/template/footer.php') ?>

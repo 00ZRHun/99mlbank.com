@@ -66,6 +66,8 @@ if (isset($_POST['changePassword'])) {
 ?>
 
 </div>
+</div>
+</div>
 <div id="changePassModal" class="modal fade">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content ">
