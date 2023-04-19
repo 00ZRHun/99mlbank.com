@@ -1,9 +1,39 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php'); ?>
+<?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
+
+if (isset($_GET['user'])) {
+    $user_id = $_GET['user'];
+    // echo "<script>alert('Debug: user_id = $user_id')</script>";   // D
+
+    // get single data - find user by id
+    $sql = "SELECT * FROM `user` WHERE id = $user_id";
+    $result = mysqli_query($conn, $sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        // echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
+    } else {
+        echo "<script>window.location.href='$url/user/index/Superadmins/index.php';</script>";   // ditto
+    }
+
+    // get upline user name
+    // $row['upline_name'] = "Master Admin";
+    $user_id = $row['upline'];
+    $sql = "SELECT * FROM `user` WHERE id = $user_id";
+    $result = mysqli_query($conn, $sql);
+    if ($result->num_rows > 0) {
+        $row_temp = $result->fetch_assoc();
+        $row['upline_name'] = $row_temp['name'];
+        // echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
+    } else {   // redirect to prev user-management page (if id is invalid)
+        echo "<script>window.location.href='$url/user/index/Superadmins/index.php';</script>";   // ditto
+    }
+}
+?>
 
 <div class="page-header">
-    <h4 class="page-title">hihihi</h4>
+    <h4 class="page-title"><?= $row['username'] ?></h4>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">hihihi</a></li>
+        <li class="breadcrumb-item"><a href="#"><?= $row['username'] ?></a></li>
         <li class="breadcrumb-item active" aria-current="page">Profile</li>
     </ol>
 
@@ -14,7 +44,7 @@
         <div class="card card-profile cover-image " data-image-src="https://bankcardsample.system1906.com/assets/images/photos/gradient3.jpg">
             <div class="card-body text-center">
                 <img class="card-profile-img" src="https://bankcardsample.system1906.com/assets/images/star.jpg" alt="img">
-                <h3 class="mb-1 text-white">hihihi</h3>
+                <h3 class="mb-1 text-white"><?= $row['username'] ?></h3>
             </div>
         </div>
     </div>
@@ -27,25 +57,26 @@
                             <table class="table row table-borderless w-100 m-0 ">
                                 <tbody class="col-lg-12 col-xl-6 p-0">
                                     <tr>
-                                        <td><strong>Name :</strong> 1111</td>
+                                        <td><strong>Name :</strong> <?= $row['name'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Contact No :</strong> 111122</td>
+                                        <td><strong>Contact No :</strong> <?= $row['contact'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Username :</strong> hihihi</td>
+                                        <td><strong>Username :</strong> <?= $row['username'] ?></td>
                                     </tr>
                                 </tbody>
                                 <tbody class="col-lg-12 col-xl-6 p-0">
                                     <tr>
-                                        <td><strong>Role :</strong> Customer</td>
+                                        <td><strong>Role :</strong> <?= $row['role'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Created By :</strong> Master Admin </td>
+                                        <td><strong>Created By :</strong> <?= $row['upline_name'] ?> </td>
                                     </tr>
                                     <tr>
                                         <td><strong>Status :</strong>
-                                            <div class="btn btn-sm" style="background-color:green;color:white">Active</div>
+                                            <!-- <div class="btn btn-sm" style="background-color:green;color:white">Active</div> -->
+                                            <div class="btn btn-sm" style="background-color:<?= $row['status'] == "Active" ? "green" : "red" ?>;color:white"><?= $row['status'] ?></div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -246,7 +277,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab3">
-                                <a class="btn btn-info" onclick="openPayModal({&quot;id&quot;:2,&quot;name&quot;:&quot;1111&quot;,&quot;username&quot;:&quot;hihihi&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Customer&quot;,&quot;contact_no&quot;:&quot;111122&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:25:14.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:25:37.000000Z&quot;,&quot;customer_cards&quot;:[{&quot;id&quot;:1,&quot;bank_id&quot;:5,&quot;card_name&quot;:&quot;RHB card&quot;,&quot;ic&quot;:&quot;111111&quot;,&quot;online_user_id&quot;:&quot;1111&quot;,&quot;online_password&quot;:&quot;1111&quot;,&quot;atm_password&quot;:&quot;1111&quot;,&quot;account_no&quot;:&quot;111&quot;,&quot;otp_no&quot;:&quot;1111&quot;,&quot;card_no&quot;:&quot;111&quot;,&quot;address_of_bank&quot;:&quot;111&quot;,&quot;secure_word&quot;:&quot;11&quot;,&quot;gmail_of_bank&quot;:&quot;111&quot;,&quot;token_key&quot;:&quot;11&quot;,&quot;from_who&quot;:1,&quot;from_price&quot;:500000,&quot;to_who&quot;:2,&quot;to_price&quot;:111,&quot;is_approved&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:35:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:41:24.000000Z&quot;,&quot;from_date&quot;:&quot;2023-04-12&quot;,&quot;to_date&quot;:null,&quot;remarks&quot;:null,&quot;initial_payment&quot;:null,&quot;approved_date&quot;:&quot;2023-04-11&quot;,&quot;approved_by&quot;:&quot;1&quot;,&quot;insurance&quot;:111,&quot;home_address&quot;:&quot;111&quot;,&quot;mother_name&quot;:&quot;11&quot;,&quot;superadmin_cost&quot;:500000,&quot;admin_cost&quot;:500000,&quot;agent_cost&quot;:500000,&quot;bank&quot;:{&quot;id&quot;:5,&quot;name&quot;:&quot;RHB&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:57:21.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:57:21.000000Z&quot;}}],&quot;invoices&quot;:[{&quot;id&quot;:1,&quot;invoice_no&quot;:&quot;20230400001&quot;,&quot;customer_id&quot;:2,&quot;year&quot;:2023,&quot;month&quot;:4,&quot;created_at&quot;:&quot;2023-04-11T01:26:05.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:26:05.000000Z&quot;,&quot;deleted_at&quot;:null,&quot;items&quot;:[{&quot;id&quot;:1,&quot;invoice_id&quot;:1,&quot;card_id&quot;:1,&quot;date_from&quot;:&quot;2023-04-12&quot;,&quot;date_to&quot;:&quot;2023-04-30&quot;,&quot;no_of_days&quot;:19,&quot;cost&quot;:111,&quot;price&quot;:70.3,&quot;year&quot;:2023,&quot;month&quot;:4,&quot;created_at&quot;:&quot;2023-04-11T01:41:24.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:41:24.000000Z&quot;,&quot;deleted_at&quot;:null,&quot;card&quot;:{&quot;id&quot;:1,&quot;bank_id&quot;:5,&quot;card_name&quot;:&quot;RHB card&quot;,&quot;ic&quot;:&quot;111111&quot;,&quot;online_user_id&quot;:&quot;1111&quot;,&quot;online_password&quot;:&quot;1111&quot;,&quot;atm_password&quot;:&quot;1111&quot;,&quot;account_no&quot;:&quot;111&quot;,&quot;otp_no&quot;:&quot;1111&quot;,&quot;card_no&quot;:&quot;111&quot;,&quot;address_of_bank&quot;:&quot;111&quot;,&quot;secure_word&quot;:&quot;11&quot;,&quot;gmail_of_bank&quot;:&quot;111&quot;,&quot;token_key&quot;:&quot;11&quot;,&quot;from_who&quot;:1,&quot;from_price&quot;:500000,&quot;to_who&quot;:2,&quot;to_price&quot;:111,&quot;is_approved&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:35:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:41:24.000000Z&quot;,&quot;from_date&quot;:&quot;2023-04-12&quot;,&quot;to_date&quot;:null,&quot;remarks&quot;:null,&quot;initial_payment&quot;:null,&quot;approved_date&quot;:&quot;2023-04-11&quot;,&quot;approved_by&quot;:&quot;1&quot;,&quot;insurance&quot;:111,&quot;home_address&quot;:&quot;111&quot;,&quot;mother_name&quot;:&quot;11&quot;,&quot;superadmin_cost&quot;:500000,&quot;admin_cost&quot;:500000,&quot;agent_cost&quot;:500000,&quot;bank&quot;:{&quot;id&quot;:5,&quot;name&quot;:&quot;RHB&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:57:21.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:57:21.000000Z&quot;}}}]}],&quot;payments&quot;:[{&quot;id&quot;:1,&quot;customer_id&quot;:2,&quot;pay_date&quot;:&quot;2023-04-12&quot;,&quot;amount&quot;:111,&quot;month&quot;:&quot;4&quot;,&quot;year&quot;:&quot;2023&quot;,&quot;remarks&quot;:null,&quot;created_at&quot;:&quot;2023-04-11T01:42:17.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:42:17.000000Z&quot;,&quot;deleted_at&quot;:null}],&quot;upline_dt&quot;:{&quot;id&quot;:1,&quot;name&quot;:&quot;Master Admin&quot;,&quot;username&quot;:&quot;masteradmin&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Masteradmin&quot;,&quot;contact_no&quot;:null,&quot;upline&quot;:null,&quot;is_active&quot;:1,&quot;created_at&quot;:null,&quot;updated_at&quot;:&quot;2023-04-13T20:15:19.000000Z&quot;}})" style="float:right;color:white;margin-bottom:10px">Pay</a>
+                                <a class="btn btn-info" onclick="openPayModal({&quot;id&quot;:2,&quot;name&quot;:&quot;1111&quot;,&quot;username&quot;:&quot;<?= $row['username'] ?>&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Customer&quot;,&quot;contact_no&quot;:&quot;111122&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:25:14.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:25:37.000000Z&quot;,&quot;customer_cards&quot;:[{&quot;id&quot;:1,&quot;bank_id&quot;:5,&quot;card_name&quot;:&quot;RHB card&quot;,&quot;ic&quot;:&quot;111111&quot;,&quot;online_user_id&quot;:&quot;1111&quot;,&quot;online_password&quot;:&quot;1111&quot;,&quot;atm_password&quot;:&quot;1111&quot;,&quot;account_no&quot;:&quot;111&quot;,&quot;otp_no&quot;:&quot;1111&quot;,&quot;card_no&quot;:&quot;111&quot;,&quot;address_of_bank&quot;:&quot;111&quot;,&quot;secure_word&quot;:&quot;11&quot;,&quot;gmail_of_bank&quot;:&quot;111&quot;,&quot;token_key&quot;:&quot;11&quot;,&quot;from_who&quot;:1,&quot;from_price&quot;:500000,&quot;to_who&quot;:2,&quot;to_price&quot;:111,&quot;is_approved&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:35:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:41:24.000000Z&quot;,&quot;from_date&quot;:&quot;2023-04-12&quot;,&quot;to_date&quot;:null,&quot;remarks&quot;:null,&quot;initial_payment&quot;:null,&quot;approved_date&quot;:&quot;2023-04-11&quot;,&quot;approved_by&quot;:&quot;1&quot;,&quot;insurance&quot;:111,&quot;home_address&quot;:&quot;111&quot;,&quot;mother_name&quot;:&quot;11&quot;,&quot;superadmin_cost&quot;:500000,&quot;admin_cost&quot;:500000,&quot;agent_cost&quot;:500000,&quot;bank&quot;:{&quot;id&quot;:5,&quot;name&quot;:&quot;RHB&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:57:21.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:57:21.000000Z&quot;}}],&quot;invoices&quot;:[{&quot;id&quot;:1,&quot;invoice_no&quot;:&quot;20230400001&quot;,&quot;customer_id&quot;:2,&quot;year&quot;:2023,&quot;month&quot;:4,&quot;created_at&quot;:&quot;2023-04-11T01:26:05.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:26:05.000000Z&quot;,&quot;deleted_at&quot;:null,&quot;items&quot;:[{&quot;id&quot;:1,&quot;invoice_id&quot;:1,&quot;card_id&quot;:1,&quot;date_from&quot;:&quot;2023-04-12&quot;,&quot;date_to&quot;:&quot;2023-04-30&quot;,&quot;no_of_days&quot;:19,&quot;cost&quot;:111,&quot;price&quot;:70.3,&quot;year&quot;:2023,&quot;month&quot;:4,&quot;created_at&quot;:&quot;2023-04-11T01:41:24.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:41:24.000000Z&quot;,&quot;deleted_at&quot;:null,&quot;card&quot;:{&quot;id&quot;:1,&quot;bank_id&quot;:5,&quot;card_name&quot;:&quot;RHB card&quot;,&quot;ic&quot;:&quot;111111&quot;,&quot;online_user_id&quot;:&quot;1111&quot;,&quot;online_password&quot;:&quot;1111&quot;,&quot;atm_password&quot;:&quot;1111&quot;,&quot;account_no&quot;:&quot;111&quot;,&quot;otp_no&quot;:&quot;1111&quot;,&quot;card_no&quot;:&quot;111&quot;,&quot;address_of_bank&quot;:&quot;111&quot;,&quot;secure_word&quot;:&quot;11&quot;,&quot;gmail_of_bank&quot;:&quot;111&quot;,&quot;token_key&quot;:&quot;11&quot;,&quot;from_who&quot;:1,&quot;from_price&quot;:500000,&quot;to_who&quot;:2,&quot;to_price&quot;:111,&quot;is_approved&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:35:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:41:24.000000Z&quot;,&quot;from_date&quot;:&quot;2023-04-12&quot;,&quot;to_date&quot;:null,&quot;remarks&quot;:null,&quot;initial_payment&quot;:null,&quot;approved_date&quot;:&quot;2023-04-11&quot;,&quot;approved_by&quot;:&quot;1&quot;,&quot;insurance&quot;:111,&quot;home_address&quot;:&quot;111&quot;,&quot;mother_name&quot;:&quot;11&quot;,&quot;superadmin_cost&quot;:500000,&quot;admin_cost&quot;:500000,&quot;agent_cost&quot;:500000,&quot;bank&quot;:{&quot;id&quot;:5,&quot;name&quot;:&quot;RHB&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:57:21.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:57:21.000000Z&quot;}}}]}],&quot;payments&quot;:[{&quot;id&quot;:1,&quot;customer_id&quot;:2,&quot;pay_date&quot;:&quot;2023-04-12&quot;,&quot;amount&quot;:111,&quot;month&quot;:&quot;4&quot;,&quot;year&quot;:&quot;2023&quot;,&quot;remarks&quot;:null,&quot;created_at&quot;:&quot;2023-04-11T01:42:17.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:42:17.000000Z&quot;,&quot;deleted_at&quot;:null}],&quot;upline_dt&quot;:{&quot;id&quot;:1,&quot;name&quot;:&quot;Master Admin&quot;,&quot;username&quot;:&quot;masteradmin&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Masteradmin&quot;,&quot;contact_no&quot;:null,&quot;upline&quot;:null,&quot;is_active&quot;:1,&quot;created_at&quot;:null,&quot;updated_at&quot;:&quot;2023-04-13T20:15:19.000000Z&quot;}})" style="float:right;color:white;margin-bottom:10px">Pay</a>
                                 <div class="table-responsive">
                                     <table id="example3" class="hover table-bordered border-top-0 border-bottom-0">
                                         <thead>
