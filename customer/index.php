@@ -166,7 +166,7 @@ function getOppositeStatus($status)
                                         </td>
                                         <td>
                                             <!-- <button class="btn btn-sm btn-info" onclick="window.location.href='https://bankcardsample.system1906.com/customer/view/2' "> -->
-                                            <button class="btn btn-sm btn-info" onclick="window.location.href='<?= $url ?>/user/view?user=' + <?= $row['id'] ?> ">
+                                            <button class="btn btn-sm btn-info" onclick="window.location.href='<?= $url ?>/customer/view.php?user=' + <?= $row['id'] ?> ">
                                                 View
                                             </button>
                                             <!-- <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:2,&quot;name&quot;:&quot;1111&quot;,&quot;username&quot;:&quot;hihihi&quot;,&quot;email&quot;:null,&quot;email_verified_at&quot;:null,&quot;role&quot;:&quot;Customer&quot;,&quot;contact_no&quot;:&quot;111122&quot;,&quot;upline&quot;:1,&quot;is_active&quot;:1,&quot;created_at&quot;:&quot;2023-04-11T01:25:14.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:25:37.000000Z&quot;})"> -->
