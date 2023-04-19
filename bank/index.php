@@ -1,4 +1,52 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php'); ?>
+<?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
+
+// create or edit bank
+if (isset($_POST['create'])) {
+
+    // get user input data
+    $name = $_POST['name'];
+
+    // if id empty, then create new bank, else update old bank
+    $id = $_POST['bank_id'];   // use to determine if CREATE or EDIT mode
+    // echo "<script>alert('id = $id';)</script>";   // D
+
+    if ($id == "") {
+        // echo "<script>alert('CREATE')</script>";   // D
+        $sql = "INSERT INTO `bank` (name) VALUES ('$name')";
+    } else {
+        // echo "<script>alert('EDIT')</script>";   // D
+        $sql = "UPDATE `bank` SET name = '$name' WHERE id = $id";
+    }
+
+    if (mysqli_query($conn, $sql)) {
+        // echo "<script>alert('Created successfully.')</script>";
+    } else {
+        echo "<script>alert('name = $name; id = $id')</script>";
+        echo "<script>alert('sql = $sql')</script>";
+        echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
+    }
+}
+
+// delete bank
+if (isset($_GET['delete'])) {
+
+    $id = $_GET['delete'];   // use to determine if CREATE or EDIT mode
+    // echo "<script>alert('id = $id';)</script>";   // D
+
+    $sql = "DELETE FROM `bank` WHERE id = $id";
+
+    if (mysqli_query($conn, $sql)) {
+        // echo "<script>alert('Created successfully.')</script>";
+        echo "<script>window.location.href='$url/bank/index.php';</script>";
+        // echo "<script>window.location.href='" . SITEURL . "/bank/index.php';</script>";   // ditto
+    } else {
+        echo "<script>alert('id = $id')</script>";
+        echo "<script>alert('sql = $sql')</script>";
+        echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
+    }
+}
+?>
 
 <div class="page-header">
     <h4 class="page-title">Bank</h4>
@@ -26,248 +74,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>MBB</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:1,&quot;name&quot;:&quot;MBB&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:56:42.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:56:42.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/1' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>PBB</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:2,&quot;name&quot;:&quot;PBB&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:56:55.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:56:55.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/2' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>CIMB</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:3,&quot;name&quot;:&quot;CIMB&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:57:02.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:57:02.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/3' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>HLB</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:4,&quot;name&quot;:&quot;HLB&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:57:10.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:57:10.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/4' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>RHB</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:5,&quot;name&quot;:&quot;RHB&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:57:21.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:57:21.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/5' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>BSN</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:6,&quot;name&quot;:&quot;BSN&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:57:41.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:57:41.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/6' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>AMBANK</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:7,&quot;name&quot;:&quot;AMBANK&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:57:51.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:57:51.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/7' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>MBB COMPANY</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:8,&quot;name&quot;:&quot;MBB COMPANY&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:59:13.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:59:13.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/8' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>RHB COMPANY</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:9,&quot;name&quot;:&quot;RHB COMPANY&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:59:23.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-08-01T06:27:38.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/9' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>HLB COMPANY</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:10,&quot;name&quot;:&quot;HLB COMPANY&quot;,&quot;created_at&quot;:&quot;2022-07-14T14:59:38.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T14:59:38.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/10' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>CIMB COMPANY</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:11,&quot;name&quot;:&quot;CIMB COMPANY&quot;,&quot;created_at&quot;:&quot;2022-07-14T15:00:24.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T15:00:24.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/11' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>BSN COMPANY</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:12,&quot;name&quot;:&quot;BSN COMPANY&quot;,&quot;created_at&quot;:&quot;2022-07-14T15:00:34.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T15:00:34.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/12' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>AMBANK COMPANY</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:13,&quot;name&quot;:&quot;AMBANK COMPANY&quot;,&quot;created_at&quot;:&quot;2022-07-14T15:01:09.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T15:01:09.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/13' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>PBB COMPANY</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:14,&quot;name&quot;:&quot;PBB COMPANY&quot;,&quot;created_at&quot;:&quot;2022-07-14T15:01:33.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T15:01:33.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/14' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>CIMB COMPANY TNG+DUITNOW</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:15,&quot;name&quot;:&quot;CIMB COMPANY TNG+DUITNOW&quot;,&quot;created_at&quot;:&quot;2022-07-14T15:02:02.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-14T15:02:02.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/15' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>CIMB CREDIT CARD</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:16,&quot;name&quot;:&quot;CIMB CREDIT CARD&quot;,&quot;created_at&quot;:&quot;2022-07-17T14:47:21.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-17T14:47:21.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/16' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>HLB CREDIT CARD</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:17,&quot;name&quot;:&quot;HLB CREDIT CARD&quot;,&quot;created_at&quot;:&quot;2022-07-17T14:47:28.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-17T14:47:28.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/17' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>ARGO COMPANY</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:18,&quot;name&quot;:&quot;ARGO COMPANY&quot;,&quot;created_at&quot;:&quot;2022-07-17T14:47:49.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-17T14:47:49.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/18' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>ARGO</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:19,&quot;name&quot;:&quot;ARGO&quot;,&quot;created_at&quot;:&quot;2022-07-17T14:47:55.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-07-17T14:47:55.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/19' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>UOB COMPANY</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:20,&quot;name&quot;:&quot;UOB COMPANY&quot;,&quot;created_at&quot;:&quot;2022-08-01T06:26:54.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-08-01T06:26:54.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/20' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>MBB TNG</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:21,&quot;name&quot;:&quot;MBB TNG&quot;,&quot;created_at&quot;:&quot;2022-08-01T06:27:06.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-08-01T06:27:06.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/21' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>ALLIANCE BANK</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:22,&quot;name&quot;:&quot;ALLIANCE BANK&quot;,&quot;created_at&quot;:&quot;2022-09-30T12:56:09.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-30T12:56:09.000000Z&quot;})">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/22' }">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
+                            <!-- list banks -->
+                            <?php
+                            $sql = "SELECT * FROM `bank`";
+                            // echo "<script>alert('sql = $sql')</script>";   // D
+                            $result = mysqli_query($conn, $sql);
+                            if ($result->num_rows > 0) {
+
+                                while ($row = $result->fetch_assoc()) {
+                                    // echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
+                            ?>
+                                    <tr>
+                                        <td><?= $row['name'] ?></td>
+                                        <td>
+                                            <!-- <button class="btn btn-sm btn-info" onclick="editModal({&quot;id&quot;:22,&quot;name&quot;:&quot;ALLIANCE BANK&quot;,&quot;created_at&quot;:&quot;2022-09-30T12:56:09.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-30T12:56:09.000000Z&quot;})"> -->
+                                            <button class="btn btn-sm btn-info" onclick='editModal(<?= json_encode($row) ?>)'>
+                                                Edit
+                                            </button>
+                                            <!-- <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='https://bankcardsample.system1906.com/bank/destroy/22' }"> -->
+                                            <button class="btn btn-sm btn-info" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='<?= $url ?>/bank/index.php?delete=' + <?= $row['id'] ?> }">
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                            <?php
+                                }
+                            }
+                            ?>
                         </tbody>
                     </table>
 
@@ -285,7 +118,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form enctype="multipart/form-data" method="post" action="https://bankcardsample.system1906.com/bank/store">
+            <!-- <form enctype="multipart/form-data" method="post" action="https://bankcardsample.system1906.com/bank/store"> -->
+            <form enctype="multipart/form-data" method="post">
                 <input type="hidden" name="_token" value="PqtUCFMuJNkIkZ2y5bubR3BkrqRCILp7VRQexTwP">
                 <div class="modal-body pd-20">
                     <div class="form-group">
@@ -295,9 +129,11 @@
                     </div>
                 </div><!-- modal-body -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
+                    <button type="submit" class="btn btn-primary" name="create">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
+            </form>
         </div>
     </div><!-- modal-dialog -->
 </div>
