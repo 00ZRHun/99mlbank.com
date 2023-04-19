@@ -1,4 +1,8 @@
 <?php
+
+// declare variable
+$isLocal = true;   // add a switch between host local or deployment to server
+
 /* if (!isset($_SESSION))
   session_start(); */
 session_start();
@@ -11,13 +15,16 @@ $dbname = "ccrdskmy_loan_software";*/
 /* $username = "ecadmin_crm";
 $password = "bXwM}E=ME^!t";
 $dbname = "ecadmin_crm"; */
-// local credential
-/* $username = "zrhun";
-$password = "password"; */
-// server credential
-$username = "ecadmin_99mlbank";
-$password = "bXwM}E=ME^!t";
-$dbname = "ecadmin_99mlbank";
+if ($isLocal) {
+  // local credential
+  $username = "zrhun";
+  $password = "password";
+} else {
+  // server credential
+  /* $username = "ecadmin_99mlbank";
+  $password = "bXwM}E=ME^!t"; */
+  $dbname = "ecadmin_99mlbank";
+}
 
 //define("SITEURL","http://readyforyourreview.com/Loan_software"); 
 
@@ -33,15 +40,17 @@ $host_name = $_SERVER['SERVER_NAME'];
 $host_name = "crm.ecomdemo.xyz";   // * TODO: 99mlbank.com
 /* $server_ssl = $_SERVER['REQUEST_SCHEME'];
 $url = $server_ssl.'://'.$host_name; */
-// $url = "http://localhost:8080";   // OPT: http://crm.ecomdemo.xyz
-$url = "https://99mlbank.com/";
-
+if ($isLocal) {
+  $url = "http://localhost:8080";   // OPT: http://crm.ecomdemo.xyz
+} else {
+  $url = "https://99mlbank.com";
+}
 // echo '$url = ' . $url;
 // print_r($_SERVER);
 // define("SITEURL","http://crm.ecomdemo.xyz");
 /* if (!defined("SITEURL"))
   define("SITEURL", $url); */
-define("SITEURL", $url);
+define("SITEURL", $url);   // TODO: direct use $url var instead SITEURL const
 // $_SESSION["SITEURL"] = $url;   // TODO: find a way to get SITEURL as global var / store as
 
 
