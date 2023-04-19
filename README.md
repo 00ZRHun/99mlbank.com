@@ -11,6 +11,9 @@ Password: 123456789
 
 ## Modules
 
+- 1st chkbox - task
+- 2nd chkbox - testing
+
 1. Login
 
    - [x] clone layout
@@ -33,35 +36,35 @@ Password: 123456789
 
 4. User-management
 
-   - [x] clone layout
-   - [x] list users
-   - [x] create user
-   - [] popup err msg if Username is taken
-   - [x] view user
-   - [x] edit user
-   - [] fix wording switch between create & edit (title & msg)
-   - [x] inactive / active user
-   - [x] reset password
-   - [x] search user
-   - [] filter user by date
-   - [] resolve dummy data
+   - [x][x] clone layout
+   - [x][x] list users
+   - [x][x] create user
+   - [x][x] filter available username only (popup err msg if Username is taken)
+   - [x][x] view user
+   - [x][x] edit user
+   - [][] fix wording switch between create & edit (title & msg)
+   - [x][x] inactive / active user
+   - [x][x] reset password
+   - [x][x] search user
+   - [][] filter user by date
+   - [][] resolve dummy data
 
 ========================= 5. Rent Pay
 
-- [x] clone layout for rent pay
-- [x] create rent table & insert dummy data by sql script
-- [x] list rent pay
-- [x] create rent pay
-- [x] edit rent pay
-- [x] delete rent pay
+- [x][x] clone layout for rent pay
+- [x][x] create rent table & insert dummy data by sql script
+- [x][x] list rent pay
+- [x][x] create rent pay
+- [x][x] edit rent pay
+- [x][x] delete rent pay
 
 6. Expenses
-   - [x] clone layout for expenses
-   - [x] create expenses table & insert dummy data by sql script
-   - [x] list expenses
-   - [x] create expenses
-   - [x] edit expenses
-   - [x] delete expenses
+   - [x][x] clone layout for expenses
+   - [x][x] create expenses table & insert dummy data by sql script
+   - [x][x] list expenses
+   - [x][x] create expenses
+   - [x][x] edit expenses
+   - [x][x] delete expenses
 
 ======
 
@@ -182,8 +185,19 @@ https://github.com/00ZRHun/99mlbank.com
     - eg. rent page is not logout correctly (http:)//localhost:8080/rent/index.php
 - add change my password
 - filter Superadmins role only
-- filter available username only
+- filter available username only (popup err msg if Username is taken)
 
 - alert 'Coming Soon' for incomplete modules/pages (other modules/pages than user, rent & expense)
 - export sql2 from local & import to server
 - upload to cpanel
+
+===
+
+- rent
+
+  - [x] filter superadmin only
+  - [] show selected superadmin
+
+- login
+  - [] username: must same upper / lower case
+  - [] password: ≥ ??? len
