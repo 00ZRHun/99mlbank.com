@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
 
-// global variable
+// initialise variables
 $role = "Customer";
 $path = $url . "customer/index.php";
 $password = "123456789";
