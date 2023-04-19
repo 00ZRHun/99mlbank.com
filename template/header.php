@@ -315,7 +315,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">Dashboard</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<!-- <a href="<?= SITEURL ?>/home2" class="slide-item">Dashboard</a> --> <!-- OPT: ../home2 -->
+								<!-- <a href="<?= SITEURL ?>/home2/index.php" class="slide-item">Dashboard</a> --> <!-- OPT: ../home2 -->
 								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Dashboard</a>
 							</li>
 						</ul>
@@ -324,7 +324,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-money"></i><span class="side-menu__label">Rent Pay</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<a href="<?= SITEURL ?>/rent/index" class="slide-item">Listing</a> <!-- OPT: ../rent/index -->
+								<a href="<?= SITEURL ?>/rent/index.php" class="slide-item">Listing</a> <!-- OPT: ../rent/index -->
 								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Listing</a> -->
 							</li>
 						</ul>
@@ -333,7 +333,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-money"></i><span class="side-menu__label">Expenses</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<a href="<?= SITEURL ?>/expense/index" class="slide-item">Listing</a> <!-- OPT: ../expense/index -->
+								<a href="<?= SITEURL ?>/expense/index.php" class="slide-item">Listing</a> <!-- OPT: ../expense/index -->
 								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Listing</a> -->
 							</li>
 						</ul>
@@ -342,7 +342,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-database"></i><span class="side-menu__label">Customers Settings</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<!-- <a href="<?= SITEURL ?>/customer/index" class="slide-item">Customer</a> --> <!-- OPT: ../customer/index -->
+								<!-- <a href="<?= SITEURL ?>/customer/index.php" class="slide-item">Customer</a> --> <!-- OPT: ../customer/index -->
 								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Customer</a>
 							</li>
 						</ul>
@@ -351,7 +351,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-database"></i><span class="side-menu__label">Cards Settings</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<!-- <a href="<?= SITEURL ?>/card/superadmin_index" class="slide-item">All Cards</a> --> <!-- OPT: ../card/superadmin_index -->
+								<!-- <a href="<?= SITEURL ?>/card/superadmin_index.php" class="slide-item">All Cards</a> --> <!-- OPT: ../card/superadmin_index -->
 								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">All Cards</a>
 							</li>
 						</ul>
@@ -360,15 +360,15 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-user"></i><span class="side-menu__label">Users Settings</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<!-- <a href="<?= SITEURL ?>/user/superadmin_index" class="slide-item">Superadmins</a> --> <!-- OPT: ../user/superadmin_index -->
+								<!-- <a href="<?= SITEURL ?>/user/superadmin_index.php" class="slide-item">Superadmins</a> --> <!-- OPT: ../user/superadmin_index -->
 								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Superadmins</a>
 							</li>
 							<li>
-								<!-- <a href="<?= SITEURL ?>/user/admin_index" class="slide-item">Admins</a> --> <!-- OPT: ../user/admin_index -->
+								<!-- <a href="<?= SITEURL ?>/user/admin_index.php" class="slide-item">Admins</a> --> <!-- OPT: ../user/admin_index -->
 								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Admins</a>
 							</li>
 							<li>
-								<!-- <a href="<?= SITEURL ?>/user/agent_index" class="slide-item">Agents</a> --> <!-- OPT: ../user/agent_index -->
+								<!-- <a href="<?= SITEURL ?>/user/agent_index.php" class="slide-item">Agents</a> --> <!-- OPT: ../user/agent_index -->
 								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Agents</a>
 							</li>
 						</ul>
@@ -377,7 +377,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">Banks Settings</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<!-- <a href="<?= SITEURL ?>/bank/index" class="slide-item">Listing</a> --> <!-- OPT: ../bank/index -->
+								<!-- <a href="<?= SITEURL ?>/bank/index.php" class="slide-item">Listing</a> --> <!-- OPT: ../bank/index -->
 								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Listing</a>
 							</li>
 						</ul>
@@ -386,7 +386,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">Announcement</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<!-- <a href="<?= SITEURL ?>/announcement/index" class="slide-item">Listing</a> --> <!-- OPT: ../announcement/index -->
+								<!-- <a href="<?= SITEURL ?>/announcement/index.php" class="slide-item">Listing</a> --> <!-- OPT: ../announcement/index -->
 								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Listing</a>
 							</li>
 						</ul>
@@ -399,7 +399,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-user"></i><span class="side-menu__label">Users Management</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<a href="<?= SITEURL ?>/user/index/Superadmins" class="slide-item">Superadmins</a> <!-- OPT: ../user/index/Superadmins -->
+								<a href="<?= SITEURL ?>/user/index/Superadmins/index.php" class="slide-item">Superadmins</a> <!-- OPT: ../user/index/Superadmins -->
 								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Superadmins</a> -->
 							</li>
 						</ul>
@@ -408,7 +408,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">My Cards</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<!-- <a href="<?= SITEURL ?>/card/index" class="slide-item">Card Details</a> --> <!-- OPT: ../card/index -->
+								<!-- <a href="<?= SITEURL ?>/card/index.php" class="slide-item">Card Details</a> --> <!-- OPT: ../card/index -->
 								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Card Details</a>
 							</li>
 						</ul>
