@@ -62,7 +62,7 @@ if (isset($_POST['login'])) {
 
         // set SESSION
         // $_SESSION["group_name"] = 'superadmin';
-        $_SESSION["user_table"] = "user";
+        $_SESSION["user_table"] = "user";   // TODO: remove user_table SESSION & its all usages (if no use it)
         $_SESSION["user_id"] = $rowadmin['id'];
         $_SESSION["upline"] = $rowadmin['id'];
 
