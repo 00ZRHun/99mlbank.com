@@ -4,6 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
 // create or edit expense
 if (isset($_POST['create'])) {
 
+    // get user input data
     $description = $_POST['description'];
     $claim_date = $_POST['claim_date'];
     $amount = $_POST['amount'];
@@ -28,7 +29,7 @@ if (isset($_POST['create'])) {
     if (mysqli_query($conn, $sql)) {
         // echo "<script>alert('Created successfully.')</script>";
     } else {
-        echo "<script>alert('description = $description ; claim_date = $claim_date; amount = $amount; id = $id')</script>";
+        echo "<script>alert('description = $description; claim_date = $claim_date; amount = $amount; id = $id')</script>";
         echo "<script>alert('sql = $sql')</script>";
         echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
     }
@@ -135,7 +136,8 @@ if (isset($_GET['delete'])) {
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form enctype="multipart/form-data" method="post"> <!-- OPT:  action="https://bankcardsample.system1906.com/expense/store" -->
+            <!-- <form enctype="multipart/form-data" method="post" action="https://bankcardsample.system1906.com/expense/store"> -->
+            <form enctype="multipart/form-data" method="post">
                 <input type="hidden" name="_token" value="CPFPhQYqgjmerci3K7AcwkfKWNWFDBWeRvcTb2pe">
                 <div class="modal-body pd-20">
                     <div class="form-group">
@@ -153,6 +155,7 @@ if (isset($_GET['delete'])) {
                     </div>
                 </div><!-- modal-body -->
                 <div class="modal-footer">
+                    <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
                     <button type="submit" class="btn btn-primary" name="create">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
