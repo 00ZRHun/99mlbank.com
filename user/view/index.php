@@ -7,34 +7,34 @@ if (isset($_GET['user'])) {
 
     // get single data - find user by id
     $sql = "SELECT * FROM `user` WHERE id = $user_id";
-    // $search_query = "SELECT * FROM `user` WHERE id = $user_id";
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
-        /* while ($row = $result->fetch_assoc()) {
-            echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
-            echo "<script>alert('Debug: username = " . $row['username'] . "')</script>";   // D
-            
-            echo $row["username"];
-        } */
-
         $row = $result->fetch_assoc();
-        $name = $row["name"];
-        $contact = $row["contact"];
-        $username = $row["username"];
-        $role = $row["role"];
-        $upline = $row["upline"];
-        $status = $row["status"];
-        // echo "<script>alert('Debug: username = $username')</script>";   // D
+        // echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
+    } else {   // redirect to prev user-management page (if id is invalid)
+        echo "<script>window.location.href='$url/user/index/Superadmins/index.php';</script>";   // ditto
+    }
+
+    // get upline user name
+    // $row['upline_name'] = "Master Admin";
+    $user_id = $row['upline'];
+    $sql = "SELECT * FROM `user` WHERE id = $user_id";
+    $result = mysqli_query($conn, $sql);
+    if ($result->num_rows > 0) {
+        $row_temp = $result->fetch_assoc();
+        $row['upline_name'] = $row_temp['name'];
+        // echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
+    } else {   // redirect to prev user-management page (if id is invalid)
+        echo "<script>window.location.href='$url/user/index/Superadmins/index.php';</script>";   // ditto
     }
 }
 ?>
-<?= $row["username"] ?>
 
 <div class="page-header">
     <!--  -->
-    <h4 class="page-title"><?= $username ?></h4> <!-- OPT: admin111 -->
+    <h4 class="page-title"><?= $row['username'] ?></h4> <!-- OPT: admin111 -->
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#"><?= $username ?></a></li>
+        <li class="breadcrumb-item"><a href="#"><?= $row['username'] ?></a></li>
         <li class="breadcrumb-item active" aria-current="page">Profile</li>
     </ol>
 
@@ -45,7 +45,7 @@ if (isset($_GET['user'])) {
         <div class="card card-profile cover-image " data-image-src="https://bankcardsample.system1906.com/assets/images/photos/gradient3.jpg">
             <div class="card-body text-center">
                 <img class="card-profile-img" src="https://bankcardsample.system1906.com/assets/images/star.jpg" alt="img">
-                <h3 class="mb-1 text-white"><?= $username ?></h3>
+                <h3 class="mb-1 text-white"><?= $row['username'] ?></h3>
             </div>
         </div>
     </div>
@@ -58,25 +58,26 @@ if (isset($_GET['user'])) {
                             <table class="table row table-borderless w-100 m-0 ">
                                 <tbody class="col-lg-12 col-xl-6 p-0">
                                     <tr>
-                                        <td><strong>Name :</strong> <?= $name ?></td>
+                                        <td><strong>Name :</strong> <?= $row['name'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Contact No :</strong> <?= $contact ?></td>
+                                        <td><strong>Contact No :</strong> <?= $row['contact'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Username :</strong> <?= $username ?></td>
+                                        <td><strong>Username :</strong> <?= $row['username'] ?></td>
                                     </tr>
                                 </tbody>
                                 <tbody class="col-lg-12 col-xl-6 p-0">
                                     <tr>
-                                        <td><strong>Role :</strong> <?= $role ?></td>
+                                        <td><strong>Role :</strong> <?= $row['role'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Upline :</strong> <?= $upline ?></td>
+                                        <td><strong>Upline :</strong> <?= $row['upline_name'] ?></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Status :</strong>
-                                            <div class="btn btn-sm" style="background-color:<?= $status == "Active" ? "green" : "red" ?>;color:white"><?= $status ?></div>
+                                            <!-- <div class="btn btn-sm" style="background-color:green;color:white">Active</div> -->
+                                            <div class="btn btn-sm" style="background-color:<?= $row['status'] == "Active" ? "green" : "red" ?>;color:white"><?= $row['status'] ?></div>
                                         </td>
                                     </tr>
                                 </tbody>
