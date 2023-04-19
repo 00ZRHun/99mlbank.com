@@ -1,7 +1,7 @@
 <?php
 
 // declare variable
-$isLocal = true;   // add a switch between host local or deployment to server
+$isLocal = false;   // add a switch mode between host local or deploy to server
 
 /* if (!isset($_SESSION))
   session_start(); */
