@@ -342,8 +342,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-database"></i><span class="side-menu__label">Customers Settings</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<!-- <a href="<?= SITEURL ?>/customer/index.php" class="slide-item">Customer</a> --> <!-- OPT: ../customer/index -->
-								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Customer</a>
+								<a href="<?= SITEURL ?>/customer/index.php" class="slide-item">Customer</a> <!-- OPT: ../customer/index -->
+								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Customer</a> -->
 							</li>
 						</ul>
 					</li>
@@ -377,8 +377,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">Banks Settings</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<!-- <a href="<?= SITEURL ?>/bank/index.php" class="slide-item">Listing</a> --> <!-- OPT: ../bank/index -->
-								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Listing</a>
+								<a href="<?= SITEURL ?>/bank/index.php" class="slide-item">Listing</a> <!-- OPT: ../bank/index -->
+								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Listing</a> -->
 							</li>
 						</ul>
 					</li>
@@ -386,8 +386,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">Announcement</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<!-- <a href="<?= SITEURL ?>/announcement/index.php" class="slide-item">Listing</a> --> <!-- OPT: ../announcement/index -->
-								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Listing</a>
+								<a href="<?= SITEURL ?>/announcement/index.php" class="slide-item">Listing</a> <!-- OPT: ../announcement/index -->
+								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Listing</a> -->
 							</li>
 						</ul>
 					</li>
@@ -435,4 +435,18 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 
 			<div class="app-content  my-3 my-md-5">
 				<div class="side-app">
-					<marquee style="padding:8px;background-color:#FDD58C"><b>要好好的做，努力赚钱，美好未来！</b></marquee>
+					<?php
+					// get single data - find announcement by Active status
+					$status = "Active";
+					$sql = "SELECT * FROM `announcement` WHERE status = '$status'";
+					$result = mysqli_query($conn, $sql);
+					if ($result->num_rows > 0) {
+						$row = $result->fetch_assoc();
+						// echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D	
+					?>
+						<marquee style="padding:8px;background-color:#FDD58C"><b><?= $row["name"] ?></b></marquee>
+					<?php
+					} else {   // redirect to prev user-management page (if id is invalid)
+						// echo "<script>window.location.href='$url/user/index/Superadmins/index.php';</script>";   // ditto
+					}
+					?>
