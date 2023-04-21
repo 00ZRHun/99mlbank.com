@@ -3,7 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
 
 // initialise variables
 $role = "Customer";
-$path = $url . "customer/index.php";
+$path = $url . "/customer/index.php";
 $password = "123456789";
 
 // create user
