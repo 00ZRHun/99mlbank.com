@@ -151,8 +151,9 @@ if (isset($_GET['delete'])) {
                             // get upline from SESSION (index.php)
                             $upline = $_SESSION["upline"];
                             $role = "Superadmins";
+                            $status = "Active";
                             // echo '$upline = ' . $upline;
-                            $sql = "SELECT * FROM `user` WHERE role = '$role' AND upline = $upline";   // filter Superadmins role only
+                            $sql = "SELECT * FROM `user` WHERE role = '$role' AND upline = $upline AND status = '$status'";   // filter Superadmins role and active user only
                             // echo "<script>alert('sql = $sql')</script>";   // D
                             $result = mysqli_query($conn, $sql);
                             if ($result->num_rows > 0) {
