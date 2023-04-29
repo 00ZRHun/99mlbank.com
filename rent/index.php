@@ -153,7 +153,7 @@ if (isset($_GET['delete'])) {
                             $role = "Superadmins";
                             $status = "Active";
                             // echo '$upline = ' . $upline;
-                            $sql = "SELECT * FROM `user` WHERE role = '$role' AND upline = $upline AND status = '$status'";   // filter Superadmins role and active user only
+                            $sql = "SELECT * FROM `user` WHERE role = '$role' AND upline = $upline AND status = '$status'";   // filter Superadmins role and active status only
                             // echo "<script>alert('sql = $sql')</script>";   // D
                             $result = mysqli_query($conn, $sql);
                             if ($result->num_rows > 0) {
