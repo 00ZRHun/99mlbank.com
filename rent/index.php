@@ -91,7 +91,7 @@ if (isset($_GET['delete'])) {
                                     $upline = $_SESSION["upline"];
                                     // echo '$upline = ' . $upline; */
                             // $sql = "SELECT * FROM `user` WHERE upline = $upline";
-                            $sql = "SELECT rt.*, us.name FROM rent as rt left join `user` as us ON rt.user_id = us.id";
+                            $sql = "SELECT rt.*, us.name FROM rent as rt LEFT JOIN `user` as us ON rt.user_id = us.id";
                             // echo "<script>alert('sql = $sql')</script>";   // D
                             $result = mysqli_query($conn, $sql);
                             if ($result->num_rows > 0) {
