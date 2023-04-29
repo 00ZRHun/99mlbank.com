@@ -34,8 +34,8 @@ DROP TABLE IF EXISTS `bank`;
 /*!50503 SET character_set_client = utf8mb4 */;
 
 
-CREATE TABLE `bank` ( `id` int NOT NULL AUTO_INCREMENT,
-                                        `name` varchar(255) CHARACTER
+CREATE TABLE `bank` (`id` int NOT NULL AUTO_INCREMENT,
+                                       `name` varchar(255) CHARACTER
                      SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
                                                             PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT
 CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
@@ -115,8 +115,8 @@ DROP TABLE IF EXISTS `announcement`;
 /*!50503 SET character_set_client = utf8mb4 */;
 
 
-CREATE TABLE `announcement` ( `id` int NOT NULL AUTO_INCREMENT,
-                                                `name` varchar(255) CHARACTER
+CREATE TABLE `announcement` (`id` int NOT NULL AUTO_INCREMENT,
+                                               `name` varchar(255) CHARACTER
                              SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
                                                                     `status` varchar(10) CHARACTER
                              SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -144,3 +144,133 @@ VALUES (1,
 
 UNLOCK TABLES;
 
+--
+-- Table structure for table `card`
+--
+
+DROP TABLE IF EXISTS `card`;
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+
+/*!50503 SET character_set_client = utf8mb4 */;
+
+--   `card_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+
+CREATE TABLE `card` (`id` int NOT NULL AUTO_INCREMENT,
+                                       `bank_id` int NOT NULL,
+                                                     `card_name` varchar(255) CHARACTER
+                     SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+                                                            `ic` varchar(255) CHARACTER
+                     SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+                                                            `online_user_id` varchar(255) CHARACTER
+                     SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+                                                            `online_password` varchar(255) CHARACTER
+                     SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+                                                            `atm_password` varchar(255) CHARACTER
+                     SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+                                                            `account_no` varchar(255) CHARACTER
+                     SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+                                                            `otp_no` varchar(255) CHARACTER
+                     SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+                                                            `card_no` varchar(255) CHARACTER
+                     SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+                                                            `address_of_bank` varchar(255) CHARACTER
+                     SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+                                                            `secure_word` varchar(255) CHARACTER
+                     SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+                                                            `gmail_of_bank` varchar(255) CHARACTER
+                     SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+                                                            `home_address` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+                                                                                                                           `mother_name` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+                                                                                                                                                                                         `token_key` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+                                                                                                                                                                                                                                                     `monthly_cost` double(10, 2) NOT NULL,
+                                                                                                                                                                                                                                                                                  `status` varchar(255) CHARACTER
+                     SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+                                                            `created_by` int DEFAULT NULL,
+                                                                                     `created_at` date DEFAULT NULL,
+                                                                                                               `rejected_by` int DEFAULT NULL,
+                                                                                                                                         `rejected_at` date DEFAULT NULL,
+                                                                                                                                                                    `reject_remark` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+                                                                                                                                                                                                                                    `cased_by` int DEFAULT NULL,
+                                                                                                                                                                                                                                                           `cased_at` date DEFAULT NULL,
+                                                                                                                                                                                                                                                                                   `case_remark` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+                                                                                                                                                                                                                                                                                                                                                 `approved_by` int DEFAULT NULL,
+                                                                                                                                                                                                                                                                                                                                                                           `approved_at` date DEFAULT NULL,
+                                                                                                                                                                                                                                                                                                                                                                                                      PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT
+CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- ???: online_user_id
+-- TODO: Price (RM), Card Status, This Month Rent(RM)
+-- TODO: LATER for below
+ --
+-- Dumping data for table `card`
+--
+ LOCK TABLES `card` WRITE;
+
+/*!40000 ALTER TABLE `card` DISABLE KEYS */;
+
+
+INSERT INTO `card`
+VALUES (1,
+        20,
+        'RHB card',
+        '111111',
+        'online_user_id',
+        'online_password',
+        'atm_password',
+        'account_no',
+        'otp_no',
+        '111',
+        'address_of_bank',
+        'secure_word',
+        'gmail_of_bank',
+        NULL,
+        NULL,
+        NULL,
+        316666.67,
+        'Approved',
+        1,
+        '2023-4-28',
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        1,
+        '2023-4-28'), (2,
+                       3,
+                       'Am Card',
+                       '121212',
+                       'online_user_id',
+                       'online_password',
+                       'atm_password',
+                       'account_no',
+                       'otp_no',
+                       '1212',
+                       'address_of_bank',
+                       'secure_word',
+                       'gmail_of_bank',
+                       NULL,
+                       NULL,
+                       NULL,
+                       316666.67,
+                       'Approved',
+                       1,
+                       '2023-4-28',
+                       NULL,
+                       NULL,
+                       NULL,
+                       NULL,
+                       NULL,
+                       NULL,
+                       1,
+                       '2023-4-28');
+
+/*!40000 ALTER TABLE `card` ENABLE KEYS */;
+
+UNLOCK TABLES;
+
+-- add createdBy, createdAt, rejectedBy, rejectedAt, rejectNote, casedBy, casedAt, caseNote
