@@ -408,8 +408,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">My Cards</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<!-- <a href="<?= SITEURL ?>/card/index.php" class="slide-item">Card Details</a> --> <!-- OPT: ../card/index -->
-								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Card Details</a>
+								<a href="<?= SITEURL ?>/card/index.php" class="slide-item">Card Details</a> <!-- OPT: ../card/index -->
+								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Card Details</a> -->
 							</li>
 						</ul>
 					</li>
