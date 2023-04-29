@@ -70,15 +70,17 @@ Password: 123456789
 ======
 
 - Customers Settings
-  - [x] clone layout for customers
-  <!-- - [x] create customers table & insert dummy data by sql script -->
+  - [x] clone layout for customer
+  <!-- - [x] create customer table & insert dummy data by sql script -->
   - [x] list customers
-  - [x] create customers
-  - [x] edit customers
-  - [x] reset password for customers
-  - [x] inactive / activate customers
+  - [x] create customer
+  - [x] edit customer
+  - [x] reset password for customer
+  - [x] inactive / activate customer
+  - [x] search customer
   - [x] clone layoput for view customer
   - [x] view customer
+  - [] assign card
   - [] resolve dummy data under customer-view
 
 **- Cards Settings**
@@ -105,6 +107,35 @@ Password: 123456789
   - [x] link announcement to header (show if have active announcement else hide)
 
 **- My Cards**
+
+- My Cards > Card Details
+
+  - [x] clone layout for Card Details
+  - [x] create card table & insert dummy data by sql script
+  - [x] list cards
+  - [x] create cards
+  - [x] edit cards
+    - [] set null if empty input (FINDING SOLUTION)
+  - [y] approve cards
+  - [] view rent for card
+  - [y] display 'Total Cards', 'Total Cost', 'Approved Cards', 'Rent Count' & 'Rent Cost'
+    ///
+  - [] resolve all "select > option" to dynamic
+
+- Cards Settings > All Cards
+
+  - [y] clone layout for All Cards
+  - [y] list cards for 'Waiting Approval'
+  - [] list cards for 'Rejected'
+  - [] list cards for 'Case'
+  - [y] list cards for 'Approved'
+    - [] view rent
+    - [] edit card
+
+  <!-- TODO -->
+
+  - view rent
+  - edit > card cost
 
 ======
 
@@ -172,16 +203,16 @@ https://github.com/00ZRHun/99mlbank.com
 
 ### 20 Apr 2023
 
-- clone layout for customers
-- create customers table & insert dummy data by sql script
+- clone layout for customer
 - list customers
-- create customers
-- edit customers
-- reset password for customers
-- inactive / activate customers
+- create customer
+- edit customer
+- reset password for customer
+- inactive / activate customer
+- clone layoput for view customer
 - view customer
 
-### 25 May 2023
+### 25 Apr 2023
 
 - clone layout for bank
 - create bank table & insert dummy data by sql script
@@ -190,7 +221,7 @@ https://github.com/00ZRHun/99mlbank.com
 - edit bank
 - delete bank
 
-### 26 May 2023
+### 26 Apr 2023
 
 - clone layout for announcement
 - create announcement table & insert dummy data by sql script
@@ -202,7 +233,27 @@ https://github.com/00ZRHun/99mlbank.com
 - delete announcement
 - link announcement to header (show if have active announcement else hide)
 
-### 27 May 2023
+### 27 Apr 2023
+
+- My Cards > Card Details
+  - clone layout for Card Details
+  - create card table & insert dummy data by sql script
+  - list cards
+  - create cards
+  - edit cards
+    ///
+  - approve cards (in progress)
+  - view rent for card (dummy data for now)
+  - display 'Total Cards', 'Total Cost', 'Approved Cards', 'Rent Count' & 'Rent Cost' (dummy data for now)
+
+### 28 Apr 2023
+
+- list cards
+- create cards
+- edit cards
+- approve cards
+- display 'Total Cards', 'Total Cost', 'Approved Cards', 'Rent Count' & 'Rent Cost'
+  - view rent for card (dummy data)
 
 ////
 FIX
