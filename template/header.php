@@ -351,8 +351,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-database"></i><span class="side-menu__label">Cards Settings</span><i class="angle fa fa-angle-right"></i></a>
 						<ul class="slide-menu">
 							<li>
-								<!-- <a href="<?= SITEURL ?>/card/superadmin_index.php" class="slide-item">All Cards</a> --> <!-- OPT: ../card/superadmin_index -->
-								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">All Cards</a>
+								<a href="<?= SITEURL ?>/card/superadmin_index.php" class="slide-item">All Cards</a> <!-- OPT: ../card/superadmin_index -->
+								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">All Cards</a> -->
 							</li>
 						</ul>
 					</li>
