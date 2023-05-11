@@ -5,13 +5,15 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
 $role = "Superadmins";
 $path = $url . "/user/index/Superadmins/index.php";
 $password = "123456789";
+// get upline from SESSION (index.php)
+$upline = $_SESSION["upline"];
+$condition_upline = "upline = $upline";
 
 // create user
 if (isset($_POST['create'])) {
     $username = $_POST['username'];
     $name = $_POST['name'];
     $contact = $_POST['contact_no'];
-    $upline = $_SESSION["upline"];
     $status = "Active";
 
     // popup err msg if Username is taken under same role
@@ -150,12 +152,11 @@ function getOppositeStatus($status)
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- list users -->
+                            <!-- list users
+                            - filter Superadmins role only -->
                             <?php
-                            // get upline from SESSION (index.php)
-                            $upline = $_SESSION["upline"];
-                            // echo '$upline = ' . $upline;
-                            $sql = "SELECT * FROM `user` WHERE role = '$role' AND upline = $upline";   // filter Superadmins role only
+                            $sql = "SELECT * FROM `user` 
+                            WHERE role = '$role' AND $condition_upline";
                             // echo "<script>alert('sql = $sql')</script>";   // D
                             $result = mysqli_query($conn, $sql);
                             if ($result->num_rows > 0) {
