@@ -302,135 +302,174 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 								</a> -->
 						</div>
 						<div class="user-info">
-							<h2>Master Admin</h2>
-							<span>Masteradmin</span>
+							<!-- <h2>Master Admin</h2>
+							<span>Masteradmin</span> -->
+							<h2><?= $_SESSION['name'] ?></h2>
+							<span><?= $_SESSION['username'] ?></span>
 						</div>
 					</div>
 				</div>
-				<ul class="side-menu">
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide"><span class="side-menu__label"><b>Masteradmin</b></span></a>
-					</li>
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">Dashboard</span><i class="angle fa fa-angle-right"></i></a>
-						<ul class="slide-menu">
-							<li>
-								<!-- <a href="<?= SITEURL ?>/home2/index.php" class="slide-item">Dashboard</a> --> <!-- OPT: ../home2 -->
-								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Dashboard</a>
-							</li>
-						</ul>
-					</li>
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-money"></i><span class="side-menu__label">Rent Pay</span><i class="angle fa fa-angle-right"></i></a>
-						<ul class="slide-menu">
-							<li>
-								<a href="<?= SITEURL ?>/rent/index.php" class="slide-item">Listing</a> <!-- OPT: ../rent/index -->
-								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Listing</a> -->
-							</li>
-						</ul>
-					</li>
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-money"></i><span class="side-menu__label">Expenses</span><i class="angle fa fa-angle-right"></i></a>
-						<ul class="slide-menu">
-							<li>
-								<a href="<?= SITEURL ?>/expense/index.php" class="slide-item">Listing</a> <!-- OPT: ../expense/index -->
-								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Listing</a> -->
-							</li>
-						</ul>
-					</li>
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-database"></i><span class="side-menu__label">Customers Settings</span><i class="angle fa fa-angle-right"></i></a>
-						<ul class="slide-menu">
-							<li>
-								<a href="<?= SITEURL ?>/customer/index.php" class="slide-item">Customer</a> <!-- OPT: ../customer/index -->
-								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Customer</a> -->
-							</li>
-						</ul>
-					</li>
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-database"></i><span class="side-menu__label">Cards Settings</span><i class="angle fa fa-angle-right"></i></a>
-						<ul class="slide-menu">
-							<li>
-								<a href="<?= SITEURL ?>/card/superadmin_index.php" class="slide-item">All Cards</a> <!-- OPT: ../card/superadmin_index -->
-								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">All Cards</a> -->
-							</li>
-						</ul>
-					</li>
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-user"></i><span class="side-menu__label">Users Settings</span><i class="angle fa fa-angle-right"></i></a>
-						<ul class="slide-menu">
-							<li>
-								<!-- <a href="<?= SITEURL ?>/user/superadmin_index.php" class="slide-item">Superadmins</a> --> <!-- OPT: ../user/superadmin_index -->
-								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Superadmins</a>
-							</li>
-							<li>
-								<!-- <a href="<?= SITEURL ?>/user/admin_index.php" class="slide-item">Admins</a> --> <!-- OPT: ../user/admin_index -->
-								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Admins</a>
-							</li>
-							<li>
-								<!-- <a href="<?= SITEURL ?>/user/agent_index.php" class="slide-item">Agents</a> --> <!-- OPT: ../user/agent_index -->
-								<a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Agents</a>
-							</li>
-						</ul>
-					</li>
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">Banks Settings</span><i class="angle fa fa-angle-right"></i></a>
-						<ul class="slide-menu">
-							<li>
-								<a href="<?= SITEURL ?>/bank/index.php" class="slide-item">Listing</a> <!-- OPT: ../bank/index -->
-								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Listing</a> -->
-							</li>
-						</ul>
-					</li>
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">Announcement</span><i class="angle fa fa-angle-right"></i></a>
-						<ul class="slide-menu">
-							<li>
-								<a href="<?= SITEURL ?>/announcement/index.php" class="slide-item">Listing</a> <!-- OPT: ../announcement/index -->
-								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Listing</a> -->
-							</li>
-						</ul>
-					</li>
+				<?php
+				// switch side-menu based on diff user roles
+				if ($_SESSION['role'] == 'Masteradmin') {
+					// Role: Masteradmin
+				?>
+					<ul class="side-menu">
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide"><span class="side-menu__label"><b>Masteradmin</b></span></a>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">Dashboard</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<!-- <a href="<?= SITEURL ?>/home2/index.php" class="slide-item">Dashboard</a> --> <!-- OPT: ../home2 -->
+									<a onclick='alert("This Module is Coming Soon!!!")' class="slide-item">Dashboard</a>
+								</li>
+							</ul>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-money"></i><span class="side-menu__label">Rent Pay</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<a href="<?= SITEURL ?>/rent/index.php" class="slide-item">Listing</a> <!-- OPT: ../rent/index -->
+									<!-- <a onclick='alert("This Module is Coming Soon!!!")' class="slide-item">Listing</a> -->
+								</li>
+							</ul>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-money"></i><span class="side-menu__label">Expenses</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<a href="<?= SITEURL ?>/expense/index.php" class="slide-item">Listing</a> <!-- OPT: ../expense/index -->
+									<!-- <a onclick='alert("This Module is Coming Soon!!!")' class="slide-item">Listing</a> -->
+								</li>
+							</ul>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-database"></i><span class="side-menu__label">Customers Settings</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<a href="<?= SITEURL ?>/customer/index.php" class="slide-item">Customer</a> <!-- OPT: ../customer/index -->
+									<!-- <a onclick='alert("This Module is Coming Soon!!!")' class="slide-item">Customer</a> -->
+								</li>
+							</ul>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-database"></i><span class="side-menu__label">Cards Settings</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<a href="<?= SITEURL ?>/card/superadmin_index.php" class="slide-item">All Cards</a> <!-- OPT: ../card/superadmin_index -->
+									<!-- <a onclick='alert("This Module is Coming Soon!!!")' class="slide-item">All Cards</a> -->
+								</li>
+							</ul>
+						</li>
+						<!-- TODO: uncomment -> role -->
+						<!-- <li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-user"></i><span class="side-menu__label">Users Settings</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li> -->
+						<!-- <a href="<?= SITEURL ?>/user/superadmin_index.php" class="slide-item">Superadmins</a> --> <!-- OPT: ../user/superadmin_index -->
+						<!-- <a onclick='alert("This Module is Coming Soon!!!")' class="slide-item">Superadmins</a>
+								</li>
+								<li> -->
+						<!-- <a href="<?= SITEURL ?>/user/admin_index.php" class="slide-item">Admins</a> --> <!-- OPT: ../user/admin_index -->
+						<!-- <a onclick='alert("This Module is Coming Soon!!!")' class="slide-item">Admins</a>
+								</li>
+								<li> -->
+						<!-- <a href="<?= SITEURL ?>/user/agent_index.php" class="slide-item">Agents</a> --> <!-- OPT: ../user/agent_index -->
+						<!-- <a onclick='alert("This Module is Coming Soon!!!")' class="slide-item">Agents</a>
+								</li>
+							</ul>
+						</li> -->
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">Banks Settings</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<a href="<?= SITEURL ?>/bank/index.php" class="slide-item">Listing</a> <!-- OPT: ../bank/index -->
+									<!-- <a onclick='alert("This Module is Coming Soon!!!")' class="slide-item">Listing</a> -->
+								</li>
+							</ul>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">Announcement</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<a href="<?= SITEURL ?>/announcement/index.php" class="slide-item">Listing</a> <!-- OPT: ../announcement/index -->
+									<!-- <a onclick='alert("This Module is Coming Soon!!!")' class="slide-item">Listing</a> -->
+								</li>
+							</ul>
+						</li>
 
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide"><span class="side-menu__label"><b>Users</b></span></a>
-					</li>
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-user"></i><span class="side-menu__label">Users Management</span><i class="angle fa fa-angle-right"></i></a>
-						<ul class="slide-menu">
-							<li>
-								<a href="<?= SITEURL ?>/user/index/Superadmins/index.php" class="slide-item">Superadmins</a> <!-- OPT: ../user/index/Superadmins -->
-								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Superadmins</a> -->
-							</li>
-						</ul>
-					</li>
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">My Cards</span><i class="angle fa fa-angle-right"></i></a>
-						<ul class="slide-menu">
-							<li>
-								<a href="<?= SITEURL ?>/card/index.php" class="slide-item">Card Details</a> <!-- OPT: ../card/index -->
-								<!-- <a onclick='alert("This Function is Coming Soon!!!")' class="slide-item">Card Details</a> -->
-							</li>
-						</ul>
-					</li>
-					<!-- </ul>
-					<div class="app-sidebar-footer">
-						<a href="emailservices.html">
-							<span class="fa fa-envelope" aria-hidden="true"></span>
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide"><span class="side-menu__label"><b>Users</b></span></a>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-user"></i><span class="side-menu__label">Users Management</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<a href="<?= SITEURL ?>/user/index/Superadmins/index.php" class="slide-item">Superadmins</a> <!-- OPT: ../user/index/Superadmins -->
+									<!-- <a onclick='alert("This Module is Coming Soon!!!")' class="slide-item">Superadmins</a> -->
+								</li>
+							</ul>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">My Cards</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<a href="<?= SITEURL ?>/card/index.php" class="slide-item">Card Details</a> <!-- OPT: ../card/index -->
+									<!-- <a onclick='alert("This Module is Coming Soon!!!")' class="slide-item">Card Details</a> -->
+								</li>
+							</ul>
+						</li>
+					</ul>
+				<?php
+				} else if ($_SESSION['role'] == 'Superadmins') {
+					// Role: Superadmins
+				?>
+					<ul class="side-menu">
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide"><span class="side-menu__label"><b>Users</b></span></a>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-user"></i><span class="side-menu__label">Users Management</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<!-- <li><a class="slide-item" href="<?= SITEURL ?>/user/index/Admins.php">Admins</a></li> -->
+								<li><a class="slide-item" href="<?= SITEURL ?>/user/index/Superadmins/index.php">Admins</a></li>
+							</ul>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">My Cards</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<a href="<?= SITEURL ?>/card/index.php" class="slide-item">Card Details</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				<?php
+				} else if ($_SESSION['role'] == 'Customer') {
+					// Role: Customer
+				?>
+				<?php
+				}
+				?>
+				<!-- <div class="app-sidebar-footer">
+					<a href="emailservices.html">
+						<span class="fa fa-envelope" aria-hidden="true"></span>
+					</a>
+					<a href="profile.html">
+						<span class="fa fa-user" aria-hidden="true"></span>
+					</a>
+					<a href="editprofile.html">
+						<span class="fa fa-cog" aria-hidden="true"></span>
+					</a>
+					<a href="login.html">
+						<span class="fa fa-sign-in" aria-hidden="true"></span>
 						</a>
-						<a href="profile.html">
-							<span class="fa fa-user" aria-hidden="true"></span>
-						</a>
-						<a href="editprofile.html">
-							<span class="fa fa-cog" aria-hidden="true"></span>
-						</a>
-						<a href="login.html">
-							<span class="fa fa-sign-in" aria-hidden="true"></span>
-							</a>
-						<a href="chat.html">
-							<span class="fa fa-comment" aria-hidden="true"></span>
-						</a>
-					</div> -->
+					<a href="chat.html">
+						<span class="fa fa-comment" aria-hidden="true"></span>
+					</a>
+				</div> -->
 			</aside>
 
 			<div class="app-content  my-3 my-md-5">
@@ -446,7 +485,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/auth.php');
 					?>
 						<marquee style="padding:8px;background-color:#FDD58C"><b><?= $row["name"] ?></b></marquee>
 					<?php
-					} else {   // redirect to prev user-management page (if id is invalid)
-						// echo "<script>window.location.href='$url/user/index/Superadmins/index.php';</script>";   // ditto
+					} else {   // redirect to home page (if id is invalid)
+						// echo "<script>window.location.href='$path_home';</script>";   // ditto
 					}
 					?>
