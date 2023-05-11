@@ -54,9 +54,9 @@ if (isset($_POST['changePassword'])) {
         $sql = "UPDATE $user_table SET password = $password WHERE id = $user_id";   // ditto
         // echo "<script>alert('Debug: sql = $sql')</script>";   // D
 
-        if (mysqli_query($conn, $sql)) {
+        if (mysqli_query($conn, $sql)) {   // redirect to home page (if id is invalid)
             // echo "<script>alert('Password change successfully.')</script>";
-            // echo "<script>window.location.replace('$url/user/index/Superadmins/index.php');</script>";
+            // echo "<script>window.location.replace('$path_home');</script>";
         } else {
             // echo "<script>alert('id = $id')</>";
             echo "<script>alert('An unknown problem occurred, please try again later.')</script>";
