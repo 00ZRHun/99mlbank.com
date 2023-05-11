@@ -30,6 +30,7 @@
   - delete expenses
 
 - Customers Settings
+
   - clone layout for customer
   - list customers
   - create customer
@@ -40,8 +41,6 @@
   - clone layoput for view customer
   - view customer
     - some dummy data haven't resolve yet
-
-///
 
 - Banks Settings
 
@@ -65,6 +64,7 @@
   - link announcement to header (show if have active announcement else hide)
 
 - My Cards > Card Details
+
   - clone layout for Card Details
   - create card table & insert dummy data by sql script
   - list cards
