@@ -64,3 +64,7 @@ $result_superadmin = mysqli_fetch_assoc($row_superadmin);
 $domain_status = $result_superadmin['status'];
 $table_prefix = $result_superadmin['table_prefix'];
 $first_method = $result_superadmin['first_method']; */
+
+// initialise variables
+// $path_home = SITEURL . "/home.php";
+$path_home = $url . "/home.php";
