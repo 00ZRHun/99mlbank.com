@@ -62,9 +62,12 @@ if (isset($_POST['login'])) {
 
         // set SESSION
         // $_SESSION["group_name"] = 'superadmin';
-        $_SESSION["user_table"] = "user";   // TODO: remove user_table SESSION & its all usages (if no use it)
-        $_SESSION["user_id"] = $rowadmin['id'];
-        $_SESSION["upline"] = $rowadmin['id'];
+        $_SESSION['user_table'] = 'user';   // TODO: remove user_table SESSION & its all usages (if no use it)
+        $_SESSION['user_id'] = $rowadmin['id'];
+        $_SESSION['upline'] = $rowadmin['id'];
+        $_SESSION['role'] = $rowadmin['role'];
+        $_SESSION['name'] = $rowadmin['name'];
+        $_SESSION['username'] = $rowadmin['username'];
 
         // TODO: get last login
         // $sql_hwe = "select * from " . $table_prefix . "recently_login order by date desc LIMIT 0,1";
@@ -75,11 +78,22 @@ if (isset($_POST['login'])) {
         // 	$row_login = mysqli_fetch_assoc($results_hwe);
         // 	$_SESSION['last_login'] = $row_login['user_id'];
         // }
+
+        // echo "<script>alert('Debug: role = " . $_SESSION["role"] . "')</script>";   // D
+        if ($_SESSION["role"] == "Customer") {
     ?>
-        <script>
-            window.location.replace("<?= SITEURL ?>/home.php");
-        </script>
+            <script>
+                window.location.replace("<?= SITEURL ?>/customer_view.php");
+            </script>
+        <?php
+        } else {
+        ?>
+            <script>
+                // window.location.replace("<?= SITEURL ?>/home.php");
+                window.location.replace("<?= $path_home ?>");
+            </script>
 <?php
+        }
     } else {
         // $is_master_admin = "false";
         $error_msg = 'These credentials do not match our records or this user is inactived.';   // OPT 'Wrong password. Try Again.', 'Login Credential Incorrect.';
