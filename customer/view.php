@@ -42,7 +42,7 @@ $result = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_array($result)) {
     $total_cards += 1;
     $total_card_price += $row['to_price'];
-    $total_invoice += $row['total'];
+    if ($row['invoice_no'] != null)  $total_invoice += $row['total'];
     $outstanding = $total_invoice - $total_payment;
     $all_outstanding = $outstanding;   // TODO: resolve dummy data
 
