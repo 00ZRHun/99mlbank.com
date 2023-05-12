@@ -34,9 +34,12 @@ while ($row = mysqli_fetch_array($result)) {
     $total_cost += $price;   // TODO: resolve dummy data
     // $total_cost = $total_cost + $row['price'];   // TODO: resolve dummy data
     // $total_cost = ($price);   // TODO: resolve dummy data
-    if ($row['status'] > 'Approved')   $approved_cards += 1;
-    if ($price > 0)   $rent_count += 1;   // TODO: resolve dummy data
-    $rent_cost += $price;   // TODO: resolve dummy data
+    if ($row['status'] == 'Approved')   $approved_cards += 1;
+    // if ($price > 0)   $rent_count += 1;   // TODO: resolve dummy data
+    if ($price > 0)   $rent_count += 0;
+
+    // $rent_cost += $price;   // TODO: resolve dummy data
+    $rent_cost += 0;
 }
 //}
 /*  else {   // redirect to current card page (if id is invalid)
@@ -243,8 +246,8 @@ if (isset($_POST['approve'])) {
                                 LEFT JOIN `bank` as bk ON cd.bank_id = bk.id 
                                 LEFT JOIN `rent_card` as rc ON cd.id = rc.card_id 
                                 WHERE $condition_created_by AND NOT($condition_cased)";
-                            echo "<script>alert('condition_created_by = $condition_created_by')</script>";   // D
-                            // echo "<script>alert('sql = $sql')</script>";   // D
+                            /* echo "<script>alert('condition_created_by = $condition_created_by')</script>";   // D
+                            echo "<script>alert('sql = $sql')</script>";   // D */
                             $result = mysqli_query($conn, $sql);
                             if ($result->num_rows > 0) {
 
