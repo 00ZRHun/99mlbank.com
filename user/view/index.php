@@ -1,6 +1,9 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
 
+// initialise variables
+$path = $url . "/user/index/Superadmins/index.php";
+
 if (isset($_GET['user'])) {
     $user_id = $_GET['user'];
     // echo "<script>alert('Debug: user_id = $user_id')</script>";   // D
@@ -11,8 +14,8 @@ if (isset($_GET['user'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         // echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
-    } else {   // redirect to prev user-management page (if id is invalid)
-        echo "<script>window.location.href='$url/user/index/Superadmins/index.php';</script>";   // ditto
+    } else {   // redirect to user-management page (if id is invalid)
+        echo "<script>window.location.href='$path';</script>";   // ditto
     }
 
     // get upline user name
@@ -24,8 +27,8 @@ if (isset($_GET['user'])) {
         $row_temp = $result->fetch_assoc();
         $row['upline_name'] = $row_temp['name'];
         // echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
-    } else {   // redirect to prev user-management page (if id is invalid)
-        echo "<script>window.location.href='$url/user/index/Superadmins/index.php';</script>";   // ditto
+    } else {   // redirect to user-management page (if id is invalid)
+        echo "<script>window.location.href='$path';</script>";   // ditto
     }
 }
 ?>
@@ -44,7 +47,8 @@ if (isset($_GET['user'])) {
     <div class="col-lg-5 col-xl-4">
         <div class="card card-profile cover-image " data-image-src="https://bankcardsample.system1906.com/assets/images/photos/gradient3.jpg">
             <div class="card-body text-center">
-                <img class="card-profile-img" src="https://bankcardsample.system1906.com/assets/images/star.jpg" alt="img">
+                <!-- <img class="card-profile-img" src="https://bankcardsample.system1906.com/assets/images/star.jpg" alt="img"> -->
+                <img class="card-profile-img" src="<?= SITEURL ?>/assets/images/star.jpg" alt="img">
                 <h3 class="mb-1 text-white"><?= $row['username'] ?></h3>
             </div>
         </div>

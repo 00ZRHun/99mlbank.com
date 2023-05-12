@@ -3,10 +3,15 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
 
 // initialise variables
 $path = $url . "/card/index.php";
+// get upline from SESSION (index.php)
+$upline = $_SESSION["upline"];
+// $condition_upline = "upline = $upline";
+$condition_created_by = "created_by = $upline";
+$condition_cased = "rc.case_remarks IS NOT NULL AND rc.cased_by IS NOT NULL AND rc.cased_at IS NOT NULL";   // get cased card
 
 // loop thru data to calculate data
 // echo "<script>alert('Debug: HERE')</script>";   // D
-$sql = "SELECT * FROM `card`";
+$sql = "SELECT * FROM `card` WHERE $condition_created_by";
 $result = mysqli_query($conn, $sql);
 
 $total_cards = 0;
@@ -34,8 +39,8 @@ while ($row = mysqli_fetch_array($result)) {
     $rent_cost += $price;   // TODO: resolve dummy data
 }
 //}
-/*  else {   // redirect to prev user-management page (if id is invalid)
-    echo "<script>window.location.href='$url/user/index/Superadmins/index.php';</script>";   // ditto
+/*  else {   // redirect to current card page (if id is invalid)
+    echo "<script>window.location.href='$path';</script>";   // ditto
 } */
 // echo "<script>alert('Debug: total_cards = $total_cards; total_cost = $total_cost; approved_cards = $approved_cards; rent_count = $rent_count; rent_cost = $rent_cost')</script>";   // D
 
@@ -48,8 +53,8 @@ while ($row = mysqli_fetch_array($result)) {
 //     $row_temp = $result->fetch_assoc();
 //     $row['upline_name'] = $row_temp['name'];
 //     // echo "<script>alert('Debug: row = " . json_encode($row) . "')</script>";   // D
-// } else {   // redirect to prev user-management page (if id is invalid)
-//     echo "<script>window.location.href='$url/user/index/Superadmins/index.php';</script>";   // ditto
+// } else {   // redirect to current card page (if id is invalid)
+//     echo "<script>window.location.href='$path';</script>";   // ditto
 // }
 
 
@@ -157,6 +162,7 @@ if (isset($_POST['approve'])) {
             </div>
             <!-- TODO: resolve dummy data -->
             <div class="card-body">
+                <!-- TODO: Total Cost vs Rent Cost? -->
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2 ">
                         <div class="card overflow-hidden">
@@ -229,9 +235,15 @@ if (isset($_POST['approve'])) {
                             <!-- list cards -->
                             <?php
                             // $sql = "SELECT * FROM `card` as cd LEFT JOIN `bank` as bk ON cd.bank_id = bk.id";
+                            // TODO: handle logic when has >1 record from rc (can rent aft rent)
                             $sql = "SELECT cd.id AS id, bk.id AS bank_id, bk.name AS name, cd.card_name AS card_name, cd.ic AS ic, cd.online_user_id AS online_user_id, cd.online_password AS online_password, cd.atm_password AS atm_password, cd.account_no AS account_no, cd.otp_no AS otp_no, cd.card_no AS card_no, cd.address_of_bank AS address_of_bank, cd.secure_word AS secure_word, cd.gmail_of_bank AS gmail_of_bank, cd.home_address AS home_address, cd.mother_name AS mother_name, cd.token_key AS token_key, 
-                                cd.monthly_cost AS monthly_cost, cd.status AS status
-                                FROM `card` as cd LEFT JOIN `bank` as bk ON cd.bank_id = bk.id";
+                                cd.monthly_cost AS monthly_cost, cd.status AS status, 
+                                rc.from_date AS from_date, rc.to_date AS to_date, rc.no_of_days AS no_of_days, rc.total AS total 
+                                FROM `card` as cd 
+                                LEFT JOIN `bank` as bk ON cd.bank_id = bk.id 
+                                LEFT JOIN `rent_card` as rc ON cd.id = rc.card_id 
+                                WHERE $condition_created_by AND NOT($condition_cased)";
+                            echo "<script>alert('condition_created_by = $condition_created_by')</script>";   // D
                             // echo "<script>alert('sql = $sql')</script>";   // D
                             $result = mysqli_query($conn, $sql);
                             if ($result->num_rows > 0) {
@@ -251,7 +263,8 @@ if (isset($_POST['approve'])) {
                                         <td><b style='color:<?= $row['status'] == "Waiting for Approval" ? "orange" : "green" ?>'><?= $row['status'] ?></b></td>
                                         <td><?= $row['monthly_cost'] ?></td> <!-- TODO: rent price -->
                                         <td>
-                                            <button class="btn btn-sm btn-info" onclick="rentModal('Masteradmin',[{&quot;id&quot;:1,&quot;card_id&quot;:1,&quot;year&quot;:2023,&quot;month&quot;:4,&quot;amount&quot;:316666.67,&quot;created_at&quot;:&quot;2023-04-11T01:41:24.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:41:24.000000Z&quot;,&quot;deleted_at&quot;:null,&quot;date_from&quot;:&quot;2023-04-12&quot;,&quot;date_to&quot;:&quot;2023-04-30&quot;,&quot;no_of_days&quot;:19,&quot;cost&quot;:500000,&quot;invoice_item_id&quot;:1,&quot;admin_cost&quot;:500000,&quot;admin_price&quot;:316666.67,&quot;agent_cost&quot;:500000,&quot;agent_price&quot;:316666.67}])">
+                                            <!-- <button class="btn btn-sm btn-info" onclick="rentModal('Masteradmin',[{&quot;id&quot;:1,&quot;card_id&quot;:1,&quot;year&quot;:2023,&quot;month&quot;:4,&quot;amount&quot;:316666.67,&quot;created_at&quot;:&quot;2023-04-11T01:41:24.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-04-11T01:41:24.000000Z&quot;,&quot;deleted_at&quot;:null,&quot;date_from&quot;:&quot;2023-04-12&quot;,&quot;date_to&quot;:&quot;2023-04-30&quot;,&quot;no_of_days&quot;:19,&quot;cost&quot;:500000,&quot;invoice_item_id&quot;:1,&quot;admin_cost&quot;:500000,&quot;admin_price&quot;:316666.67,&quot;agent_cost&quot;:500000,&quot;agent_price&quot;:316666.67}])"> -->
+                                            <button class="btn btn-sm btn-info" onclick='rentModal("Masteradmin",<?= json_encode(array($row)) ?>)'>
                                                 View Rent
                                             </button>
                                             <?php
@@ -448,7 +461,6 @@ if (isset($_POST['approve'])) {
                 <div class="modal-footer">
                     <!-- <button type="submit" class="btn btn-primary"> -->
                     <!-- <button type="submit" class="btn btn-primary" onclick="window.location.href='<?= $path ?>?approve=' + <?= $row['id'] ?> + '&monthly_cost='  + <?= $row['monthly_cost'] ?>"> -->
-                    <!-- <button type="submit" class="btn btn-primary" onclick="window.location.href='<?= $path ?>?approve=' + <?= $row['id'] ?> + '&monthly_cost='  + <?= $row['monthly_cost'] ?>"> -->
                     <button class="btn btn-primary" name="approve">
                         Save changes
                     </button>
@@ -547,19 +559,30 @@ if (isset($_POST['approve'])) {
 
 
     function rentModal(role, data) {
-        console.log(role);
+        /* console.log(role);   // D
+        alert(role);   // D
+        alert(data);   // D
+        alert(JSON.stringify(data));   // D */
+
         $("#rentingModal").modal();
 
         $('#items_details').empty();
+        // TODO: handle logic when has >1 record from rc (can rent aft rent)
         data.forEach(function(row) {
-            var amount = row.amount;
-            if (role == "Admins") {
-                amount = row.admin_price;
+            if (row.from_date != null) { // discard null data row
+                var amount = row.amount;
+                // TODO: role agent
+                /* if (role == "Admins") {
+                    amount = row.admin_price;
+                }
+                if (role == "Agents") {
+                    amount = row.agent_price;
+                } */
+                amount = row.total;
+
+                // OPT: row.date_from, row.date_to
+                $('#items_details').append('<tr><td>' + row.from_date + '</td><td>' + row.to_date + '</td><td>' + row.no_of_days + '</td><td>' + amount + '</td></tr>');
             }
-            if (role == "Agents") {
-                amount = row.agent_price;
-            }
-            $('#items_details').append('<tr><td>' + row.date_from + '</td><td>' + row.date_to + '</td><td>' + row.no_of_days + '</td><td>' + amount + '</td></tr>');
         });
     }
 </script>
