@@ -1,3 +1,9 @@
+新版本已经 upload 上 server 了
+
+https://99mlbank.com
+Username: masteradmin
+Password: 123456789
+
 - User-management
 
   - clone layout
@@ -40,7 +46,24 @@
   - search customer
   - clone layoput for view customer
   - view customer
-    - some dummy data haven't resolve yet
+  - do calculation & display result
+  - rent card details
+    - Cards
+      - list rent card
+      - assign card / create rent card
+      - edit rent card
+      - delete rent card
+    - Invoices
+      - generate (invoice nombor)
+      - list invoices
+      - edit invoices
+      - delete invoices
+    - Payments
+      - add payment (pay)
+      - list payments
+      - delete payment
+    - Cases
+      - list cased rent card
 
 - Banks Settings
 
@@ -73,3 +96,19 @@
   - approve cards
   - view rent for card (DUMMY DATA)
   - display 'Total Cards', 'Total Cost', 'Approved Cards', 'Rent Count' & 'Rent Cost'
+
+- Customer-view (Access level: customer only)
+  - clone layout for customer-view
+  - view user
+  - do calculation & display result
+  - rent card details
+    - Cards
+      - list rent card
+      - view card details
+    - Invoices
+      - list invoices
+      - view invoice
+    - Payments
+      - list payments
+    - Cases
+      - list cased rent card

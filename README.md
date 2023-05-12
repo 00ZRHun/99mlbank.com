@@ -143,9 +143,10 @@ mysql> USE ecadmin_99mlbank
   - [x] search customer
   - [x] clone layoput for view customer
   - [x] view customer
-  - [] resolve dummy data under customer-view
-    - [y] do calculation & display result
-      - [y] filter non-cased card
+  - [y] do calculation & display result
+    - [y] filter non-cased card
+  - [] rent card details
+    - - resolve dummy data under customer-view
     - [] Cards
       - [x] list rent card
         - [x] filter customer's rent card
@@ -156,6 +157,7 @@ mysql> USE ecadmin_99mlbank
           - [x] filter non-used rent card (/filter out rented card)
       - [x] edit rent card
       - [x] delete rent card
+      - [x] case rent card
       - [???] rent ended for end card
       - [???] remove this month for end card
     - [y] Invoices
@@ -169,26 +171,28 @@ mysql> USE ecadmin_99mlbank
         - [] blocking condition (DOUBLE CHK: rent up until May, can't add June)
       - [x] delete payment
     - [x] Cases
-      - [x] case rent card
-        - [x] list cased rent card
+      - [x] list cased rent card
 
 - Customer-view (Access level: customer only)
+
   - [x] clone layout for customer-view
   - [x] view user
   - [x] do calculation & display result
-  - [] resolve dummy data under customer-view
+  - [x] rent card details
+    - - resolve dummy data under customer-view
     - [x] Cards
       - [x] list rent card
         - [x] filter customer's rent card
         - [x] filter non-cased rent card
       - [x] view card details
-    - [] Invoices
+    - [x] Invoices
       - [o] list invoices
       - [x] view invoice
     - [x] Payments
       - [x] list payments
     - [x] Cases
       - [x] list cased rent card
+
 - header
   - [o] switch diff side-menu based on user role of Masteradmin
   - [o] switch diff side-menu based on user role of Superadmins
@@ -478,17 +482,17 @@ https://github.com/00ZRHun/99mlbank.com
 
 ### 12 May 2023
 
-- filter user-list by upline under User-management
 - view user under Customer-view
 - do calculation & display result under Customer-view
 - view invoice under customer-view
+- filter user-list by upline under User-management
+
+///
+
 - filter card-list by created_by under Card Details
 - filter card-list by non cased under Card Details ???
 - view rent for card under Card Details
 - filter by created_by under Card Details
-
-///
-
 - fix $approved_cards under Card Details
 - fix $rent_count under Card Details
 - fix $rent_cost under Card Details
