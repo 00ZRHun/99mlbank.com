@@ -97,7 +97,7 @@ mysql> USE ecadmin_99mlbank
 
    - [x][x] clone layout
    - [x][x] list users
-     - [.../] filter by upline
+     - [x] filter by upline
    - [x][x] create user
    - [x][x] filter available username only (popup err msg if Username is taken)
    - [x][x] view user
@@ -156,10 +156,8 @@ mysql> USE ecadmin_99mlbank
           - [x] filter non-used rent card (/filter out rented card)
       - [x] edit rent card
       - [x] delete rent card
-      - [.../] rent ended for end card
-        - TEMP CMT
-      - [.../] remove this month for end card
-        - TEMP CMT
+      - [???] rent ended for end card
+      - [???] remove this month for end card
     - [y] Invoices
       - [y] generate (invoice nombor)
       - [x] list invoices
@@ -174,10 +172,10 @@ mysql> USE ecadmin_99mlbank
       - [x] case rent card
         - [x] list cased rent card
 
-- customer-view (Access level: customer only)
+- Customer-view (Access level: customer only)
   - [x] clone layout for customer-view
-  - [.../] view user
-  - [.../] do calculation & display result
+  - [x] view user
+  - [x] do calculation & display result
   - [] resolve dummy data under customer-view
     - [x] Cards
       - [x] list rent card
@@ -186,7 +184,7 @@ mysql> USE ecadmin_99mlbank
       - [x] view card details
     - [] Invoices
       - [o] list invoices
-      - [.../] view invoice
+      - [x] view invoice
     - [x] Payments
       - [x] list payments
     - [x] Cases
@@ -228,20 +226,20 @@ mysql> USE ecadmin_99mlbank
   - [x] clone layout for Card Details
   - [x] create card table & insert dummy data by sql script
   - [x] list cards
-    - [.../] filter by created_by
-    - [.../] filter by non cased
+    - [x] filter by created_by
+    - [x] filter by non cased
     - [] TODO: handle logic when has >1 record from rc (can rent aft rent)
     - [] TODO: role agent
   - [x] create cards
   - [x] edit cards
     - [] set null if empty input (FINDING SOLUTION)
   - [y] approve cards
-  - [.../] view rent for card
+  - [x] view rent for card
   - [y] display 'Total Cards', 'Total Cost', 'Approved Cards', 'Rent Count' & 'Rent Cost'
-    - [.../] filter by created_by
-      ///
-  - [] resolve all "select > option" to dynamic
-  - [] resolve all "https://bankcardsample.system1906.com" to ours
+    - [x] filter by created_by
+          ///
+  - [...] resolve all "select > option" to dynamic
+  - [...] resolve all "https://bankcardsample.system1906.com" to ours
 
 - Cards Settings > All Cards
 
@@ -268,9 +266,7 @@ mysql> USE ecadmin_99mlbank
 
 === LATER ===
 
-- [.../] Dashboard
-
-  - TEMP CMT
+- [...] Dashboard
 
   - [] clone layout for Dashboard
   - [] do calculation & display result
@@ -479,6 +475,29 @@ https://github.com/00ZRHun/99mlbank.com
         - filter customer's rent card
         - filter non-cased rent card
       - view card details
+
+### 12 May 2023
+
+- filter user-list by upline under User-management
+- view user under Customer-view
+- do calculation & display result under Customer-view
+- view invoice under customer-view
+- filter card-list by created_by under Card Details
+- filter card-list by non cased under Card Details ???
+- view rent for card under Card Details
+- filter by created_by under Card Details
+
+///
+
+- fix $approved_cards under Card Details
+- fix $rent_count under Card Details
+- fix $rent_cost under Card Details
+
+///
+
+- rent ended for end card
+- remove this month for end card
+- Dashboard
 
 - simplify customer/view
   - simplify $path, $prev_path
