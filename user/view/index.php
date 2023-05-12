@@ -45,7 +45,8 @@ if (isset($_GET['user'])) {
 
 <div class="row">
     <div class="col-lg-5 col-xl-4">
-        <div class="card card-profile cover-image " data-image-src="https://bankcardsample.system1906.com/assets/images/photos/gradient3.jpg">
+        <!-- <div class="card card-profile cover-image " data-image-src="https://bankcardsample.system1906.com/assets/images/photos/gradient3.jpg"> -->
+        <div class="card card-profile cover-image " data-image-src="<?= SITEURL ?>/assets/images/photos/gradient3.jpg">
             <div class="card-body text-center">
                 <!-- <img class="card-profile-img" src="https://bankcardsample.system1906.com/assets/images/star.jpg" alt="img"> -->
                 <img class="card-profile-img" src="<?= SITEURL ?>/assets/images/star.jpg" alt="img">
